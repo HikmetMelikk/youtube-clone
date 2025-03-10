@@ -1,0 +1,111 @@
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5rem;
+	.navbarLeft {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		.youtubeIcon {
+			width: 100px;
+			height: 40px;
+		}
+		.hamburger {
+			height: 24px;
+			width: 24px;
+		}
+	}
+	.navbarRight {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+	.navbarCenter {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		width: 50%;
+		gap: 1rem;
+		.search {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			input {
+				padding: 0.6rem 1.5rem;
+				border-radius: 40px 0 0 40px;
+				border: 0.5px solid hsl(0, 0%, 18.82%);
+				background-color: hsl(0, 0%, 7%);
+				width: 100%;
+				font-size: 1rem;
+				outline: none;
+				::placeholder {
+					color: #606060;
+				}
+				&:focus {
+					border-color: #1c62b9;
+				}
+			}
+
+			button {
+				padding: 1.15rem 1.5rem;
+				border-radius: 0 40px 40px 0;
+				border: 1px solid hsl(0, 0%, 18.82%);
+				border-left: none;
+				color: #606060;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
+.iconStyles {
+	height: 24px;
+	width: 24px;
+}
+#search {
+	position: absolute;
+}
+
+.navbarIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: none;
+	background-color: rgba(70, 70, 70, 0.09);
+	img {
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		object-fit: cover;
+	}
+	&:hover {
+		cursor: pointer;
+	}
+}
+.microphone {
+	&:hover {
+		background-color: rgba(148, 142, 142, 0.1);
+	}
+}
+.createContent {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 110px;
+	padding: 0.5rem;
+	border-radius: 20px;
+	border: none;
+	background-color: #2e2e2e;
+	text-decoration: none;
+	font-weight: bold;
+	gap: 0.5rem;
+	&:hover {
+		cursor: pointer;
+	}
+}

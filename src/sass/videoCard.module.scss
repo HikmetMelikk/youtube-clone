@@ -1,0 +1,82 @@
+.videoCard {
+	height: 300px;
+
+	border-radius: 10px;
+	margin: 1rem;
+	position: relative;
+
+	.videoThumbnail {
+		height: 60%;
+		width: 100%;
+		object-fit: cover;
+		position: relative;
+		img {
+			border-radius: 10px;
+			width: 100%;
+			height: 100%;
+		}
+
+		.videoDuration {
+			position: absolute;
+			bottom: 8px;
+			right: 8px;
+			background-color: rgba(0, 0, 0, 0.8);
+			color: white;
+			padding: 3px 4px;
+			border-radius: 2px;
+			font-size: 12px;
+			font-weight: 500;
+		}
+	}
+
+	.videoInfo {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		padding: 0.5rem;
+		position: relative;
+		.menu {
+			position: absolute;
+			top: 8px;
+			right: 8px;
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		.videoAvatar {
+			width: 36px;
+			height: 36px;
+			border-radius: 50%;
+			flex-shrink: 0;
+			img {
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				object-fit: cover;
+			}
+		}
+		.videoDetails {
+			display: flex;
+			flex-direction: column;
+			margin-left: 0.5rem;
+			.videoTitle {
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				line-clamp: 2;
+				-webkit-line-clamp: 2;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				font-size: 1rem;
+				font-weight: 500;
+				color: #fff;
+			}
+			.videoChannelAndViews {
+				display: flex;
+				flex-direction: column;
+				font-size: 0.8rem;
+				color: #aaa;
+			}
+		}
+	}
+}
