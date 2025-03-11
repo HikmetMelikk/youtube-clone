@@ -1,0 +1,80 @@
+.searchResult {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	position: relative;
+	width: 100%;
+
+	.thumbnail {
+		width: 700px;
+		height: 280px;
+		border-radius: 8px;
+		position: relative;
+		border-radius: 12px;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.duration {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			bottom: 6px;
+			right: 6px;
+			background-color: rgba(0, 0, 0, 0.8);
+			color: white;
+			font-size: 0.8rem;
+			font-weight: bold;
+			padding: 0.2rem 0.3rem;
+			border-radius: 2px;
+		}
+	}
+
+	.details {
+		display: flex;
+		flex-direction: column;
+		margin-left: 2rem;
+		width: 100%;
+	}
+
+	.title {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		p {
+			display: inline-flex;
+		}
+	}
+
+	.view {
+		color: #aaa;
+		font-size: 0.8rem;
+		font-weight: 400;
+		margin-top: 0;
+	}
+
+	.description {
+		font-size: 0.8rem;
+		color: #aaa;
+	}
+
+	.channel {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 0.5rem;
+		color: #aaa;
+		font-size: 0.8rem;
+		img {
+			width: 24px;
+			height: 24px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
+	}
+}

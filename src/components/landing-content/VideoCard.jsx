@@ -1,5 +1,5 @@
 import { CiMenuKebab } from "react-icons/ci";
-import styles from "../sass/videoCard.module.scss";
+import styles from "../../sass/videoCard.module.scss";
 
 function VideoCard({
 	id,
@@ -21,7 +21,7 @@ function VideoCard({
 					<img src={channel.avatar} alt="avatar" />
 				</span>
 				<div className={styles.videoDetails}>
-					<h4 className={styles.videoTitle}>{title}</h4>
+					<span className={styles.videoTitle}>{title}</span>
 					<div className={styles.videoChannelAndViews}>
 						<span>{channel.name}</span>
 						<span>

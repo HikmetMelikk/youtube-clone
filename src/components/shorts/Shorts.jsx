@@ -1,0 +1,22 @@
+import React from "react";
+import { CiMenuKebab } from "react-icons/ci";
+import styles from "../../sass/shorts.module.scss";
+
+function Shorts({ id, title, thumbnail, views }) {
+	return (
+		<div className={styles.shorts} key={id}>
+			<div className={styles.thumbnail}>
+				<img src={thumbnail} alt="shorts" />
+			</div>
+			<div className={styles.info}>
+				<h4>{title}</h4>
+				<span>{views} Görüntülenme</span>
+				<span className={styles.menu}>
+					<CiMenuKebab />
+				</span>
+			</div>
+		</div>
+	);
+}
+
+export default Shorts;

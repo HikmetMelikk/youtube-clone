@@ -1,12 +1,12 @@
 import "./App.scss";
-import Content from "./components/Content";
-import NavBar from "./components/NavBar/NavBar";
+import NavBar from "./components/navbar/NavBar";
+import Router from "./routes/Router";
 
 function App() {
 	return (
 		<>
 			<NavBar />
-			<Content />
+			<Router />
 		</>
 	);
 }
