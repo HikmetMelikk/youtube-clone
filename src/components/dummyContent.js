@@ -1,7 +1,8 @@
 export const videos = [
 	{
 		id: 1,
-		title: "React JS Crash Course 2025 - Build 5 Projects in 10 Hours",
+		title:
+			"React JS Crash Course 2025 - Build 5 Projects in 10 Hours React JS Crash Course 2025 - Build 5 Projects in 10 Hours",
 		thumbnailUrl: "https://i.ytimg.com/vi/bMknfKXIFA8/maxresdefault.jpg",
 		channel: {
 			name: "Coding Academy",

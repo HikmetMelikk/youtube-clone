@@ -60,13 +60,8 @@
 			display: flex;
 			flex-direction: column;
 			margin-left: 0.5rem;
+			max-width: 350px;
 			.videoTitle {
-				display: -webkit-box;
-				-webkit-box-orient: vertical;
-				line-clamp: 2;
-				-webkit-line-clamp: 2;
-				overflow: hidden;
-				text-overflow: ellipsis;
 				font-size: 1rem;
 				font-weight: 500;
 				color: #fff;
@@ -78,6 +73,7 @@
 				flex-direction: column;
 				font-size: 0.8rem;
 				color: #aaa;
+				gap: 0.5rem;
 			}
 		}
 	}

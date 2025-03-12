@@ -4,14 +4,25 @@ import { IoIosMenu, IoMdNotificationsOutline } from "react-icons/io";
 import { TbMicrophoneFilled } from "react-icons/tb";
 import emrethefuckingaka from "../../assets/emrethefuckingaka.png";
 
+import { useState } from "react";
+import { useNavigate } from "react-router";
 import styles from "../../sass/navbar.module.scss";
 
 function NavBar() {
+	const [search, setSearch] = useState("");
+	const navigate = useNavigate();
+
+	const handleSearch = () => {
+		if (search.trim()) {
+			navigate(`/results?search_query=${search.trim()}`);
+		}
+	};
+
 	return (
 		<nav className={styles.navbar}>
 			<section className={styles.navbarLeft}>
 				<IoIosMenu className={styles.hamburger} />
-				<div className={styles.youtubeIcon}>
+				<div className={styles.youtubeIcon} onClick={() => navigate("/")}>
 					<span className={styles.youtubeIcon}>
 						<div
 							style={{
@@ -57,8 +68,18 @@ function NavBar() {
 
 			<section className={styles.navbarCenter}>
 				<div className={styles.search}>
-					<input type="text" placeholder="Ara" />
-					<button className={styles.navbarIcon}>
+					<input
+						type="text"
+						placeholder="Ara"
+						onChange={(e) => setSearch(e.target.value)}
+						onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+						value={search}
+					/>
+					<button
+						className={styles.navbarIcon}
+						onClick={() => {
+							console.log(search);
+						}}>
 						<CiSearch className={styles.iconStyles} id="search" />
 					</button>
 				</div>

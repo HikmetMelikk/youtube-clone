@@ -13,7 +13,7 @@ function VideoCard({
 	return (
 		<div className={styles.videoCard} key={id}>
 			<div className={styles.videoThumbnail}>
-				<img src={thumbnailUrl} alt="video" />
+				<img src={thumbnailUrl} loading="lazy" alt="video" />
 				<span className={styles.videoDuration}>{duration}</span>
 			</div>
 			<div className={styles.videoInfo}>

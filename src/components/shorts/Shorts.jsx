@@ -6,7 +6,7 @@ function Shorts({ id, title, thumbnail, views }) {
 	return (
 		<div className={styles.shorts} key={id}>
 			<div className={styles.thumbnail}>
-				<img src={thumbnail} alt="shorts" />
+				<img src={thumbnail} loading="lazy" alt="shorts" />
 			</div>
 			<div className={styles.info}>
 				<h4>{title}</h4>
@@ -20,3 +20,9 @@ function Shorts({ id, title, thumbnail, views }) {
 }
 
 export default Shorts;
+
+// regex
+// folder structure
+// video açılacak ve izlenecek
+// responsive
+// scss dosyaları düzenlenecek
