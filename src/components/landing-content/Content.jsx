@@ -1,7 +1,7 @@
 // import { useEffect, useState } from "react";
 // import YoutubeAPI from "../../client/youtube-api";
-import "../dummyContent";
-import { videos } from "../dummyContent";
+import "../../utils/dummyContent";
+import { videos } from "../../utils/dummyContent";
 import VideoCard from "./VideoCard";
 
 function Content() {

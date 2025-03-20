@@ -1,6 +1,4 @@
-import React from "react";
-import "../dummyShortsContent";
-import { shortsDummyData } from "../dummyShortsContent";
+import { shortsDummyData } from "../../utils/dummyShortsContent";
 import Shorts from "./Shorts";
 
 function ShortsContent() {
@@ -41,7 +39,7 @@ function ShortsContent() {
 			<section
 				style={{
 					display: "grid",
-					gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr)",
+					gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr)",
 				}}>
 				{shortsDummyData.map((shorts) => (
 					<Shorts key={shorts.id} {...shorts} />

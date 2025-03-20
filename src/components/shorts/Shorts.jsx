@@ -1,6 +1,6 @@
 import React from "react";
 import { CiMenuKebab } from "react-icons/ci";
-import styles from "../../sass/shorts.module.scss";
+import styles from "./shorts.module.scss";
 
 function Shorts({ id, title, thumbnail, views }) {
 	return (

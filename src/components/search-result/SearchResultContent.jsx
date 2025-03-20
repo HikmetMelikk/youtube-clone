@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import YoutubeAPI from "../../client/youtube-api";
-import SearchResult from "./SearchResult";
+import SearchResult from "./SearchResultCard";
 
 function SearchResultContent() {
 	const [searchParams] = useSearchParams();
@@ -48,11 +48,12 @@ function SearchResultContent() {
 
 			{results.map((item) => (
 				<SearchResult
-					key={item.id.videoId}
+					id={item.id.videoId}
 					img={item.snippet?.thumbnails?.high?.url || ""}
-					duration="3:45"
+					duration={item.contentDetails?.duration || ""}
 					title={item.snippet?.title || ""}
-					view="10K"
+					view={item.statistics?.viewCount || ""}
+					publish={item.snippet?.publishedAt || ""}
 					channel={item.snippet?.channelTitle || ""}
 					description={item.snippet?.description || ""}
 				/>

@@ -6,7 +6,7 @@ import emrethefuckingaka from "../../assets/emrethefuckingaka.png";
 
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import styles from "../../sass/navbar.module.scss";
+import styles from "./navbar.module.scss";
 
 function NavBar() {
 	const [search, setSearch] = useState("");

@@ -1,5 +1,5 @@
 import { CiMenuKebab } from "react-icons/ci";
-import styles from "../../sass/videoCard.module.scss";
+import styles from "./videoCard.module.scss";
 
 function VideoCard({
 	id,
