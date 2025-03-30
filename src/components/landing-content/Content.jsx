@@ -3,6 +3,7 @@
 import "../../utils/dummyContent";
 import { videos } from "../../utils/dummyContent";
 import VideoCard from "./VideoCard";
+import styles from "./videoCard.module.scss";
 
 function Content() {
 	// const [searchResult, setSearchResult] = useState();
@@ -17,11 +18,7 @@ function Content() {
 	// }, []);
 
 	return (
-		<section
-			style={{
-				display: "grid",
-				gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
-			}}>
+		<section className={styles.content}>
 			{videos.map((video) => (
 				<VideoCard key={video.id} {...video} />
 			))}

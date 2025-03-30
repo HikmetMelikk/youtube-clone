@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import YoutubeAPI from "../../client/youtube-api";
 import SearchResult from "./SearchResultCard";
+import styles from "./searchResult.module.scss";
 
 function SearchResultContent() {
 	const [searchParams] = useSearchParams();
@@ -30,16 +31,7 @@ function SearchResultContent() {
 	}, [searchQuery]);
 
 	return (
-		<section
-			style={{
-				display: "flex",
-				width: "100%",
-				maxWidth: "1200px",
-				margin: "0 auto",
-				padding: "20px",
-				flexDirection: "column",
-				gap: "20px",
-			}}>
+		<section className={styles.searchResultContent}>
 			{loading && <p>Aranıyor...</p>}
 			{error && <p>{error}</p>}
 			{!loading && !error && results.length === 0 && searchQuery && (
@@ -48,7 +40,7 @@ function SearchResultContent() {
 
 			{results.map((item) => (
 				<SearchResult
-					id={item.id.videoId}
+					key={item.id.videoId}
 					img={item.snippet?.thumbnails?.high?.url || ""}
 					duration={item.contentDetails?.duration || ""}
 					title={item.snippet?.title || ""}

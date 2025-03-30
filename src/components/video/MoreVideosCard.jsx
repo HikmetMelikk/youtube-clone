@@ -1,19 +1,30 @@
+import { formatPublishDate } from "../../utils/format";
 import styles from "./videoView.module.scss";
 
-export default function MoreVideosCard() {
+export default function MoreVideosCard({
+	videoId,
+	title,
+	channelTitle,
+	thumbnail,
+	publishedAt,
+}) {
 	return (
-		<div className={styles.moreVideosCard}>
+		<a href={`/watch?v=${videoId}`} className={styles.moreVideosCard}>
 			<div className={styles.thumbnail}>
-				<img loading="lazy" src="https://picsum.photos/200/300" alt="avatar" />
+				<img
+					loading="lazy"
+					src={thumbnail || "https://placehold.co/168x94/333/aaa"}
+					alt={title}
+				/>
 			</div>
 			<div className={styles.videoChannelDetails}>
-				<h3 className={styles.videoTitle}>Video İsmi</h3>
-				<p className={styles.channelName}>Kanal Adı</p>
+				<h3 className={styles.videoTitle}>{title}</h3>
+				<p className={styles.channelName}>{channelTitle}</p>
 				<div className={styles.videoViewDate}>
-					<p>Görüntülenme sayısı</p>
-					<p>Yayınlanma tarihi</p>
+					<p>Önerilen video</p>
+					<p>{formatPublishDate(publishedAt)}</p>
 				</div>
 			</div>
-		</div>
+		</a>
 	);
 }
