@@ -1,79 +1,243 @@
+// -----------------------------------------------------------------------------
+// 1. Değişkenler
+// -----------------------------------------------------------------------------
+
+// Ekran boyutları
 $mobile-small: 480px;
 $mobile: 576px;
 $tablet: 768px;
 $desktop-small: 992px;
 $desktop: 1200px;
 
+// Container genişlikleri
 $container-mobile: 100%;
 $container-tablet: 720px;
 $container-desktop-small: 960px;
 $container-desktop: 1140px;
 $container-desktop-large: 1280px;
 
+// Renkler
+$color-bg-dark: #000;
+$color-text-primary: #fff;
+$color-text-secondary: #aaa;
+$color-button-primary: #fff;
+$color-button-text: #0f0f0f;
+$color-button-blue: #3ea6ff;
+$color-hover-light: rgba(255, 255, 255, 0.1);
+$color-hover-medium: rgba(255, 255, 255, 0.2);
+$color-divider: rgba(255, 255, 255, 0.3);
+
+// Boyutlar
+$border-radius-sm: 8px;
+$border-radius-md: 12px;
+$border-radius-round: 18px;
+$avatar-size-desktop: 40px;
+$avatar-size-mobile: 36px;
+$button-height-desktop: 36px;
+$button-height-mobile: 32px;
+
+// Boşluklar
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 24px;
+
+// Tipografi
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.8rem;
+$font-size-base: 0.9rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.2rem;
+$line-height-sm: 1.2rem;
+$line-height-base: 1.4rem;
+$line-height-md: 1.6rem;
+$line-height-lg: 2.2rem;
+
+// -----------------------------------------------------------------------------
+// 2. Mixinler
+// -----------------------------------------------------------------------------
+
+// Medya sorguları için mixinler
+@mixin mobile-small {
+	@media screen and (max-width: $mobile-small) {
+		@content;
+	}
+}
+
+@mixin mobile {
+	@media screen and (max-width: $mobile) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media screen and (max-width: $tablet) {
+		@content;
+	}
+}
+
+@mixin desktop-small {
+	@media screen and (max-width: $desktop-small) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media screen and (max-width: $desktop) {
+		@content;
+	}
+}
+
+@mixin min-tablet {
+	@media screen and (min-width: $tablet) {
+		@content;
+	}
+}
+
+@mixin min-desktop {
+	@media screen and (min-width: $desktop) {
+		@content;
+	}
+}
+
+// Metni kırpma ve elipsis
+@mixin text-truncate($lines: 2) {
+	overflow: hidden;
+	display: block;
+	display: -webkit-box;
+	-webkit-line-clamp: $lines;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	white-space: normal;
+}
+
+// Düğme temel stili
+@mixin button-base {
+	border: none;
+	cursor: pointer;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	@include mobile {
+		font-size: $font-size-base;
+		padding: 0 $spacing-md;
+		height: $button-height-mobile;
+	}
+}
+
+// Yuvarlak düğme stili
+@mixin button-round($bg-color: $color-hover-light) {
+	@include button-base;
+	background-color: $bg-color;
+	border-radius: $border-radius-round;
+	height: $button-height-desktop;
+	padding: 0 $spacing-lg;
+
+	&:hover {
+		background-color: $color-hover-medium;
+	}
+}
+
+// Avatar stili
+@mixin avatar($size: $avatar-size-desktop) {
+	width: $size;
+	height: $size;
+	border-radius: 50%;
+	overflow: hidden;
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@include mobile {
+		width: $avatar-size-mobile;
+		height: $avatar-size-mobile;
+	}
+}
+
+// İki satırlı başlık stili
+@mixin video-title {
+	font-weight: 700;
+	@include text-truncate(2);
+}
+
+// -----------------------------------------------------------------------------
+// 3. Stil Tanımları
+// -----------------------------------------------------------------------------
+
+// Video konteynırı
 .videoContainer {
 	width: 100%;
 	max-width: 100%;
 	margin: 0 auto;
 	padding: 0;
 	overflow: hidden;
-	background: #000;
+	background: $color-bg-dark;
 
-	@media screen and (max-width: $desktop) {
+	@include desktop {
 		max-width: $container-desktop;
 	}
 
-	@media screen and (max-width: $desktop-small) {
+	@include desktop-small {
 		max-width: $container-desktop-small;
 	}
 
-	@media screen and (max-width: $tablet) {
+	@include tablet {
 		max-width: $container-tablet;
 		padding: 0;
 	}
 
-	@media screen and (max-width: $mobile) {
+	@include mobile {
 		max-width: $container-mobile;
 		padding: 0;
 	}
 }
 
+// Video oynatıcı
 .video {
 	display: flex;
 	flex-direction: row;
 	position: relative;
 	width: 100%;
-	height: 56.25vw;
+	height: 56.25vw; // 16:9 aspect ratio
 	max-height: calc(100vh - 169px);
 	min-height: 300px;
 	overflow-x: clip;
-	background: #000;
+	background: $color-bg-dark;
 
-	@media (min-width: $tablet) {
+	@include min-tablet {
 		min-height: 360px;
 		max-height: 720px;
 	}
 
-	@media (min-width: $desktop) {
+	@include min-desktop {
 		min-height: 480px;
 	}
-	@media (max-width: $tablet) {
+
+	@include tablet {
 		height: 56.25vw;
 	}
 }
 
+// Video detayları bölümü
 .videoViewDetails {
 	display: flex;
 	flex-direction: row;
 	flex: 1;
-
 	margin: 0 auto;
 
-	@media screen and (max-width: $tablet) {
+	@include tablet {
 		flex-direction: column;
 		gap: 1rem;
 		padding: 0;
 	}
 
+	// Video bilgileri
 	.videoDetails {
 		display: flex;
 		flex: 1;
@@ -82,78 +246,60 @@ $container-desktop-large: 1280px;
 		padding-right: 2rem;
 		padding-left: 2rem;
 
-		@media screen and (max-width: $desktop-small) {
+		@include desktop-small {
 			padding-right: 1rem;
 		}
 
-		@media screen and (max-width: $tablet) {
+		@include tablet {
 			margin-left: 0;
-			padding: 0 0.5rem;
-			gap: 0.5rem;
+			padding: 0 $spacing-sm;
+			gap: $spacing-sm;
 		}
 
+		// Video başlığı
 		.videoTitle {
-			margin-top: 0.5rem;
-			font-size: 1.2rem;
-			line-height: 2.2rem;
-			font-weight: 700;
-			overflow: hidden;
-			display: block;
+			margin-top: $spacing-sm;
+			font-size: $font-size-lg;
+			line-height: $line-height-lg;
 			max-height: 5.6rem;
-			line-clamp: 2;
-			-webkit-line-clamp: 2;
-			display: -webkit-box;
-			-webkit-box-orient: vertical;
-			text-overflow: ellipsis;
-			white-space: normal;
+			@include video-title;
 
-			@media screen and (max-width: $tablet) {
-				font-size: 1rem;
-				line-height: 1.4rem;
+			@include tablet {
+				font-size: $font-size-md;
+				line-height: $line-height-base;
 				max-height: 2.8rem;
 				margin: 0.75rem 0 0;
 			}
 		}
 
+		// Video üst satır düzeni
 		.videoTopRow {
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
 
-			@media screen and (max-width: $tablet) {
+			@include tablet {
 				flex-direction: column;
 				align-items: flex-start;
 				gap: 0.75rem;
-				padding: 0 0.5rem;
+				padding: 0 $spacing-sm;
 			}
 		}
 
+		// Kanal bilgileri
 		.channelInformation {
 			display: flex;
 			flex-direction: row;
 			align-items: center;
 			gap: 1rem;
 
-			@media screen and (max-width: $tablet) {
+			@include tablet {
 				width: 100%;
 				gap: 0.75rem;
 			}
 
 			.channelAvatar {
-				width: 40px;
-				height: 40px;
-				border-radius: 50%;
-
-				@media screen and (max-width: $mobile) {
-					width: 36px;
-					height: 36px;
-				}
-			}
-
-			.channelAvatar img {
-				width: 100%;
-				height: 100%;
-				border-radius: 50%;
+				@include avatar;
 			}
 
 			.channelName {
@@ -162,51 +308,52 @@ $container-desktop-large: 1280px;
 				flex: 1;
 
 				p {
-					font-size: 1rem;
+					font-size: $font-size-md;
 					font-weight: 500;
 
-					@media screen and (max-width: $mobile) {
-						font-size: 0.9rem;
+					@include mobile {
+						font-size: $font-size-base;
 					}
 				}
 
 				span {
-					font-size: 0.8rem;
-					line-height: 1.6rem;
-					color: #aaa;
+					font-size: $font-size-sm;
+					line-height: $line-height-md;
+					color: $color-text-secondary;
 
-					@media screen and (max-width: $mobile) {
-						font-size: 0.75rem;
-						line-height: 1.2rem;
+					@include mobile {
+						font-size: $font-size-xs;
+						line-height: $line-height-sm;
 					}
 				}
 			}
 
 			button {
-				background-color: white;
-				color: #0f0f0f;
+				background-color: $color-button-primary;
+				color: $color-button-text;
 				border: none;
-				padding: 0 12px;
-				height: 36px;
+				padding: 0 $spacing-md;
+				height: $button-height-desktop;
 				font-size: 14px;
 				font-weight: 600;
-				line-height: 36px;
-				border-radius: 18px;
+				line-height: $button-height-desktop;
+				border-radius: $border-radius-round;
 				cursor: pointer;
 
 				&:hover {
 					background-color: #e1e0e0;
 				}
 
-				@media screen and (max-width: $mobile) {
-					height: 32px;
-					line-height: 32px;
+				@include mobile {
+					height: $button-height-mobile;
+					line-height: $button-height-mobile;
 					font-size: 13px;
-					padding: 0 10px;
+					padding: 0 $spacing-sm;
 				}
 			}
 		}
 
+		// Video üst satır butonları
 		.videoTopRowButtons {
 			display: flex;
 			flex-direction: row;
@@ -215,48 +362,49 @@ $container-desktop-large: 1280px;
 			gap: 1rem;
 			position: relative;
 
-			@media screen and (max-width: $tablet) {
+			@include tablet {
 				width: 100%;
-				gap: 0.5rem;
+				gap: $spacing-sm;
 				flex-wrap: wrap;
 			}
 
+			// Beğen/beğenme butonları
 			.likeDislikeButtons {
 				display: flex;
 				align-items: center;
-				background-color: rgba(255, 255, 255, 0.1);
-				border-radius: 18px;
-				height: 36px;
+				background-color: $color-hover-light;
+				border-radius: $border-radius-round;
+				height: $button-height-desktop;
 
-				@media screen and (max-width: $mobile) {
-					height: 32px;
+				@include mobile {
+					height: $button-height-mobile;
 				}
 
 				.like,
 				.dislike {
 					display: flex;
 					align-items: center;
-					padding: 0 16px;
+					padding: 0 $spacing-lg;
 					height: 100%;
 					cursor: pointer;
 
 					&:hover {
-						background-color: rgba(255, 255, 255, 0.2);
+						background-color: $color-hover-medium;
 					}
 
-					@media screen and (max-width: $mobile) {
-						padding: 0 12px;
+					@include mobile {
+						padding: 0 $spacing-md;
 					}
 				}
 
 				.like {
-					border-radius: 18px 0 0 18px;
+					border-radius: $border-radius-round 0 0 $border-radius-round;
 
 					.count {
 						margin-left: 6px;
 
-						@media screen and (max-width: $mobile) {
-							margin-left: 4px;
+						@include mobile {
+							margin-left: $spacing-xs;
 							font-size: 13px;
 						}
 					}
@@ -265,41 +413,22 @@ $container-desktop-large: 1280px;
 				.divider {
 					width: 1px;
 					height: 24px;
-					background-color: rgba(255, 255, 255, 0.3);
+					background-color: $color-divider;
 
-					@media screen and (max-width: $mobile) {
+					@include mobile {
 						height: 20px;
 					}
 				}
 
 				.dislike {
-					border-radius: 0 18px 18px 0;
+					border-radius: 0 $border-radius-round $border-radius-round 0;
 				}
 			}
 
+			// Paylaş ve indir butonları
 			.share,
 			.download {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				background-color: rgba(255, 255, 255, 0.1);
-				border-radius: 18px;
-				border: none;
-				padding: 0 16px;
-				height: 36px;
-				font-size: 14px;
-				line-height: 36px;
-
-				@media screen and (max-width: $mobile) {
-					height: 32px;
-					line-height: 32px;
-					padding: 0 12px;
-					font-size: 13px;
-				}
-
-				&:hover {
-					cursor: pointer;
-				}
+				@include button-round;
 
 				.icon {
 					width: 20px;
@@ -307,85 +436,83 @@ $container-desktop-large: 1280px;
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					margin-right: 8px;
+					margin-right: $spacing-sm;
 
-					@media screen and (max-width: $mobile) {
+					@include mobile {
 						width: 18px;
 						height: 18px;
 						margin-right: 6px;
 					}
 				}
-
-				&:hover {
-					background-color: rgba(255, 255, 255, 0.2);
-				}
 			}
 		}
 
+		// Video alt satır
 		.videoBottomRow {
 			position: relative;
 			width: 100%;
-			margin-right: 12px;
-			margin-top: 12px;
-			border-radius: 12px;
-			background-color: rgba(255, 255, 255, 0.1);
-			padding: 12px;
+			margin-right: $spacing-md;
+			margin-top: $spacing-md;
+			border-radius: $border-radius-md;
+			background-color: $color-hover-light;
+			padding: $spacing-md;
 			display: flex;
 			flex-direction: column;
 
-			@media screen and (max-width: $tablet) {
-				background-color: rgba(255, 255, 255, 0.1);
+			@include tablet {
 				margin-right: 0;
-				margin-top: 8px;
+				margin-top: $spacing-sm;
 				border-radius: 0;
 				background-color: transparent;
-				padding: 0 0.5rem;
+				padding: 0 $spacing-sm;
 			}
 
+			// Video istatistikleri
 			.videoStats {
 				display: flex;
 				flex-direction: row;
 				gap: 1rem;
 
-				@media screen and (max-width: $mobile) {
-					gap: 0.5rem;
+				@include mobile {
+					gap: $spacing-sm;
 					flex-wrap: wrap;
 				}
 
 				.videoViews,
 				.videoDate {
-					color: #fff;
+					color: $color-text-primary;
 					font-size: 14px;
 					font-weight: 500;
 
-					@media screen and (max-width: $mobile) {
+					@include mobile {
 						font-size: 13px;
-						color: #aaa;
+						color: $color-text-secondary;
 					}
 				}
 			}
 
+			// Video açıklaması
 			.videoDescriptionContainer {
-				margin-top: 12px;
+				margin-top: $spacing-md;
 				width: 100%;
 
-				@media screen and (max-width: $tablet) {
-					background-color: rgba(255, 255, 255, 0.1);
-					margin-top: 8px;
+				@include tablet {
+					background-color: $color-hover-light;
+					margin-top: $spacing-sm;
 					border-radius: 1rem;
-					padding: 12px;
+					padding: $spacing-md;
 				}
 
 				.videoDescription {
 					font-size: 14px;
 					line-height: 20px;
-					color: #fff;
+					color: $color-text-primary;
 					white-space: pre-line;
 					max-height: 60px;
 					overflow: hidden;
 					transition: max-height 0.3s ease;
 
-					@media screen and (max-width: $mobile) {
+					@include mobile {
 						font-size: 13px;
 						line-height: 18px;
 						max-height: 54px;
@@ -399,45 +526,47 @@ $container-desktop-large: 1280px;
 				.showMoreButton {
 					background: none;
 					border: none;
-					color: #aaaaaa;
+					color: $color-text-secondary;
 					font-size: 14px;
 					font-weight: 500;
-					padding: 8px 0;
+					padding: $spacing-sm 0;
 					cursor: pointer;
 					display: block;
 					width: max-content;
-					margin-top: 8px;
+					margin-top: $spacing-sm;
 
-					@media screen and (max-width: $mobile) {
+					@include mobile {
 						font-size: 13px;
 						padding: 6px 0;
-						margin-top: 4px;
+						margin-top: $spacing-xs;
 					}
 
 					&:hover {
-						color: #ffffff;
+						color: $color-text-primary;
 					}
 				}
 			}
 		}
 
+		// Yorumlar bölümü
 		.videoComments {
-			margin-top: 24px;
+			margin-top: $spacing-xl;
 			width: 100%;
 
-			@media screen and (max-width: $tablet) {
-				display: none;
-				margin-top: 16px;
-				padding: 0 0.5rem;
+			@include tablet {
+				display: none; // Mobil görünümde yorumları gizle
+				margin-top: $spacing-lg;
+				padding: 0 $spacing-sm;
 			}
 
+			// Yorum girişi
 			.commentInput {
 				display: flex;
 				align-items: center;
 				margin-bottom: 32px;
 				position: relative;
 
-				@media screen and (max-width: $tablet) {
+				@include tablet {
 					margin-bottom: 20px;
 				}
 
@@ -446,44 +575,44 @@ $container-desktop-large: 1280px;
 					background-color: transparent;
 					border: none;
 					border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-					padding: 8px 0;
+					padding: $spacing-sm 0;
 					font-size: 14px;
-					color: #fff;
+					color: $color-text-primary;
 					outline: none;
 
-					@media screen and (max-width: $mobile) {
+					@include mobile {
 						font-size: 13px;
 						padding: 6px 0;
 					}
 
 					&::placeholder {
-						color: #aaa;
+						color: $color-text-secondary;
 					}
 
 					&:focus {
-						border-bottom: 2px solid #3ea6ff;
+						border-bottom: 2px solid $color-button-blue;
 					}
 				}
 
 				button {
-					background-color: #3ea6ff;
-					color: #0f0f0f;
+					background-color: $color-button-blue;
+					color: $color-button-text;
 					border: none;
-					border-radius: 18px;
+					border-radius: $border-radius-round;
 					font-size: 14px;
 					font-weight: 500;
-					padding: 0 16px;
-					height: 36px;
+					padding: 0 $spacing-lg;
+					height: $button-height-desktop;
 					cursor: pointer;
-					margin-left: 16px;
+					margin-left: $spacing-lg;
 					opacity: 0.7;
 					transition: opacity 0.2s;
 
-					@media screen and (max-width: $mobile) {
+					@include mobile {
 						font-size: 13px;
-						padding: 0 12px;
-						height: 32px;
-						margin-left: 12px;
+						padding: 0 $spacing-md;
+						height: $button-height-mobile;
+						margin-left: $spacing-md;
 					}
 
 					&:hover {
@@ -492,40 +621,28 @@ $container-desktop-large: 1280px;
 				}
 			}
 
+			// Yorum listesi
 			.commentList {
 				display: flex;
 				flex-direction: column;
-				gap: 24px;
+				gap: $spacing-xl;
 
-				@media screen and (max-width: $tablet) {
-					gap: 16px;
+				@include tablet {
+					gap: $spacing-lg;
 				}
 
+				// Tek yorum
 				.comment {
 					display: flex;
-					gap: 16px;
+					gap: $spacing-lg;
 
-					@media screen and (max-width: $mobile) {
-						gap: 12px;
+					@include mobile {
+						gap: $spacing-md;
 					}
 
 					.commentAvatar {
-						width: 40px;
-						height: 40px;
-						border-radius: 50%;
-						overflow: hidden;
+						@include avatar;
 						flex-shrink: 0;
-
-						@media screen and (max-width: $mobile) {
-							width: 36px;
-							height: 36px;
-						}
-
-						img {
-							width: 100%;
-							height: 100%;
-							object-fit: cover;
-						}
 					}
 
 					.commentContent {
@@ -535,24 +652,24 @@ $container-desktop-large: 1280px;
 						.commentHeader {
 							display: flex;
 							align-items: baseline;
-							margin-bottom: 4px;
+							margin-bottom: $spacing-xs;
 
 							p {
 								font-size: 13px;
 								font-weight: 500;
 								margin: 0;
-								margin-right: 8px;
+								margin-right: $spacing-sm;
 
-								@media screen and (max-width: $mobile) {
+								@include mobile {
 									font-size: 12px;
 								}
 							}
 
 							span {
 								font-size: 12px;
-								color: #aaa;
+								color: $color-text-secondary;
 
-								@media screen and (max-width: $mobile) {
+								@include mobile {
 									font-size: 11px;
 								}
 							}
@@ -561,11 +678,11 @@ $container-desktop-large: 1280px;
 						.commentText {
 							font-size: 14px;
 							line-height: 20px;
-							color: #fff;
-							margin-bottom: 8px;
+							color: $color-text-primary;
+							margin-bottom: $spacing-sm;
 							word-wrap: break-word;
 
-							@media screen and (max-width: $mobile) {
+							@include mobile {
 								font-size: 13px;
 								line-height: 18px;
 							}
@@ -573,33 +690,33 @@ $container-desktop-large: 1280px;
 
 						.commentActions {
 							display: flex;
-							gap: 16px;
-							margin-top: 8px;
+							gap: $spacing-lg;
+							margin-top: $spacing-sm;
 
-							@media screen and (max-width: $mobile) {
-								gap: 12px;
+							@include mobile {
+								gap: $spacing-md;
 								margin-top: 6px;
 							}
 
 							button {
 								background: none;
 								border: none;
-								color: #aaa;
+								color: $color-text-secondary;
 								font-size: 12px;
 								display: flex;
 								align-items: center;
-								gap: 4px;
+								gap: $spacing-xs;
 								cursor: pointer;
-								padding: 4px 8px;
-								border-radius: 16px;
+								padding: $spacing-xs $spacing-sm;
+								border-radius: $spacing-lg;
 
-								@media screen and (max-width: $mobile) {
+								@include mobile {
 									font-size: 11px;
 									padding: 3px 6px;
 								}
 
 								&:hover {
-									background-color: rgba(255, 255, 255, 0.1);
+									background-color: $color-hover-light;
 								}
 							}
 						}
@@ -615,66 +732,69 @@ $container-desktop-large: 1280px;
 		}
 	}
 
+	// Benzer videolar
 	.moreVideos {
-		padding-right: 24px;
+		padding-right: $spacing-xl;
 		width: 402px;
 		min-width: 300px;
-		margin-top: 24px;
+		margin-top: $spacing-xl;
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
+		gap: $spacing-md;
 
-		@media screen and (max-width: $desktop-small) {
+		@include desktop-small {
 			width: 350px;
 			min-width: 280px;
-			padding-right: 16px;
+			padding-right: $spacing-lg;
 		}
 
-		@media screen and (max-width: $tablet) {
+		@include tablet {
 			width: 100%;
-			padding: 0 0.5rem;
-			margin-top: 16px;
+			padding: 0 $spacing-sm;
+			margin-top: $spacing-lg;
 			min-width: 0;
 		}
 
+		// Benzer video kartı
 		.moreVideosCard {
 			display: flex;
 			flex-direction: row;
-			gap: 12px;
+			gap: $spacing-md;
 			margin-bottom: 0;
 			text-decoration: none;
 			cursor: pointer;
-			padding: 8px;
-			border-radius: 8px;
+			padding: $spacing-sm;
+			border-radius: $border-radius-sm;
 			transition: background-color 0.2s;
 
-			@media screen and (max-width: $tablet) {
+			@include tablet {
 				flex-direction: column;
 				width: 100%;
-				gap: 8px;
-				padding: 4px;
+				gap: $spacing-sm;
+				padding: $spacing-xs;
 			}
 
 			&:hover {
-				background-color: rgba(255, 255, 255, 0.1);
+				background-color: $color-hover-light;
 			}
 
+			// Önizleme resmi
 			.thumbnail {
 				margin-right: 0;
 				height: 94px;
 				width: 168px;
 				min-width: 168px;
-				border-radius: 8px;
+				border-radius: $border-radius-sm;
 				overflow: hidden;
 				background-color: #333;
 
-				@media screen and (max-width: $tablet) {
+				@include tablet {
 					height: 80px;
 					width: 142px;
 					min-width: 142px;
 				}
 
-				@media screen and (max-width: $mobile-small) {
+				@include mobile-small {
 					height: 100%;
 					width: 100%;
 				}
@@ -686,6 +806,7 @@ $container-desktop-large: 1280px;
 				}
 			}
 
+			// Video ve kanal detayları
 			.videoChannelDetails {
 				display: flex;
 				flex-direction: column;
@@ -694,56 +815,50 @@ $container-desktop-large: 1280px;
 				height: 94px;
 				overflow: hidden;
 
-				@media screen and (max-width: $tablet) {
+				@include tablet {
 					height: 80px;
 				}
 
-				@media screen and (max-width: $mobile-small) {
+				@include mobile-small {
 					height: 72px;
 				}
 
+				// Video başlığı
 				.moreVideoTitle {
 					font-size: 0.95rem;
-					font-weight: 700;
-					color: #fff;
-					overflow: hidden;
-					display: block;
-					max-height: 2.8rem;
-					line-clamp: 2;
-					-webkit-line-clamp: 2;
-					display: -webkit-box;
-					-webkit-box-orient: vertical;
-					text-overflow: ellipsis;
-					white-space: normal;
-					margin: 0 0 4px 0;
+					color: $color-text-primary;
+					margin: 0 0 $spacing-xs 0;
+					@include video-title;
 
-					@media screen and (max-width: $tablet) {
+					@include tablet {
 						font-size: 0.85rem;
 						max-height: 2.4rem;
 						margin-bottom: 2px;
 					}
 				}
 
+				// Kanal adı
 				.channelName {
-					font-size: 0.8rem;
-					color: #aaa;
-					margin: 0 0 4px 0;
+					font-size: $font-size-sm;
+					color: $color-text-secondary;
+					margin: 0 0 $spacing-xs 0;
 
-					@media screen and (max-width: $tablet) {
-						font-size: 0.75rem;
+					@include tablet {
+						font-size: $font-size-xs;
 						margin-bottom: 2px;
 					}
 				}
 
+				// İzlenme ve tarih bilgisi
 				.videoViewDate {
 					display: flex;
 					flex-direction: row;
-					font-size: 0.8rem;
-					color: #aaa;
-					gap: 8px;
+					font-size: $font-size-sm;
+					color: $color-text-secondary;
+					gap: $spacing-sm;
 
-					@media screen and (max-width: $tablet) {
-						font-size: 0.75rem;
+					@include tablet {
+						font-size: $font-size-xs;
 						gap: 6px;
 					}
 
@@ -756,6 +871,7 @@ $container-desktop-large: 1280px;
 	}
 }
 
+// Yükleme ve hata durumları
 .loading,
 .error {
 	display: flex;
@@ -763,6 +879,6 @@ $container-desktop-large: 1280px;
 	align-items: center;
 	height: 200px;
 	width: 100%;
-	font-size: 1rem;
-	color: #aaa;
+	font-size: $font-size-md;
+	color: $color-text-secondary;
 }
