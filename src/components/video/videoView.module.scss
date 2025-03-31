@@ -17,7 +17,7 @@ $container-desktop: 1140px;
 $container-desktop-large: 1280px;
 
 // Renkler
-$color-bg-dark: #000;
+$color-bg-dark: #0f0f0f;
 $color-text-primary: #fff;
 $color-text-secondary: #aaa;
 $color-button-primary: #fff;
@@ -242,7 +242,7 @@ $line-height-lg: 2.2rem;
 		display: flex;
 		flex: 1;
 		flex-direction: column;
-		gap: 1rem;
+		gap: .3rem;
 		padding-right: 2rem;
 		padding-left: 2rem;
 

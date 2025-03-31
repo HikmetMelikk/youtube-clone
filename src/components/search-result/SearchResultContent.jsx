@@ -30,12 +30,17 @@ function SearchResultContent() {
 		}
 	}, [searchQuery]);
 
+	// Generate random view count for demo purposes
+	const generateRandomViewCount = () => {
+		return Math.floor(Math.random() * 10000000) + 100000;
+	};
+
 	return (
 		<section className={styles.searchResultContent}>
 			{loading && <p>Aranıyor...</p>}
 			{error && <p>{error}</p>}
 			{!loading && !error && results.length === 0 && searchQuery && (
-				<p>"{searchQuery}" için sonuç bulunamadı.</p>
+				<p>&ldquo;{searchQuery}&rdquo; için sonuç bulunamadı.</p>
 			)}
 
 			{results.map((item) => (
@@ -45,7 +50,7 @@ function SearchResultContent() {
 					img={item.snippet?.thumbnails?.high?.url || ""}
 					duration={item.contentDetails?.duration || ""}
 					title={item.snippet?.title || ""}
-					view={item.statistics?.viewCount || ""}
+					view={item.statistics?.viewCount || generateRandomViewCount()}
 					publish={item.snippet?.publishedAt || ""}
 					channel={item.snippet?.channelTitle || ""}
 					description={item.snippet?.description || ""}

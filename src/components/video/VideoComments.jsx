@@ -1,24 +1,63 @@
 import { useEffect, useState } from "react";
+import YoutubeAPI from "../../client/youtube-api";
 import styles from "./videoView.module.scss";
 
 export default function VideoComments({ commentCount, videoId }) {
 	const [comments, setComments] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
 
-	// For now we'll just display a placeholder comment
-	// In a real implementation, you would fetch comments using YouTube API
 	useEffect(() => {
-		// This would be where you fetch comments from the API
-		// For now, just create a placeholder comment
 		if (videoId) {
-			setComments([
-				{
-					id: "1",
-					authorDisplayName: "Örnek Kullanıcı",
-					authorProfileImageUrl: "https://picsum.photos/200/300",
-					textDisplay: "Bu bir örnek yorum içeriğidir.",
-					publishedAt: new Date().toISOString(),
-				},
-			]);
+			setLoading(true);
+			setError(null);
+
+			YoutubeAPI.getVideoComments(videoId)
+				.then((data) => {
+					if (data.items && data.items.length > 0) {
+						// Map API response to our comment format
+						const formattedComments = data.items.map((item) => ({
+							id: item.id,
+							authorDisplayName:
+								item.snippet.topLevelComment.snippet.authorDisplayName,
+							authorProfileImageUrl:
+								item.snippet.topLevelComment.snippet.authorProfileImageUrl,
+							textDisplay: item.snippet.topLevelComment.snippet.textDisplay,
+							publishedAt: item.snippet.topLevelComment.snippet.publishedAt,
+							likeCount: item.snippet.topLevelComment.snippet.likeCount,
+						}));
+						setComments(formattedComments);
+					} else {
+						// Fall back to a placeholder if no comments are available
+						setComments([
+							{
+								id: "placeholder",
+								authorDisplayName: "Yorum bulunamadı",
+								authorProfileImageUrl: "https://picsum.photos/200/300",
+								textDisplay: "Bu video için henüz yorum yapılmamış.",
+								publishedAt: new Date().toISOString(),
+							},
+						]);
+					}
+				})
+				.catch((err) => {
+					console.error("Comments error:", err);
+					setError("Yorumlar yüklenirken bir hata oluştu");
+					// Set a placeholder comment on error
+					setComments([
+						{
+							id: "error",
+							authorDisplayName: "Hata",
+							authorProfileImageUrl: "https://picsum.photos/200/300",
+							textDisplay:
+								"Yorumlar yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+							publishedAt: new Date().toISOString(),
+						},
+					]);
+				})
+				.finally(() => {
+					setLoading(false);
+				});
 		}
 	}, [videoId]);
 
@@ -42,6 +81,10 @@ export default function VideoComments({ commentCount, videoId }) {
 				<input type="text" placeholder="Yorum yaz..." />
 				<button>Gönder</button>
 			</div>
+			{loading && (
+				<div className={styles.commentLoading}>Yorumlar yükleniyor...</div>
+			)}
+			{error && <div className={styles.commentError}>{error}</div>}
 			<div className={styles.commentList}>
 				{comments.map((comment) => (
 					<div key={comment.id} className={styles.comment}>
@@ -57,7 +100,14 @@ export default function VideoComments({ commentCount, videoId }) {
 								<p>{comment.authorDisplayName}</p>
 								<span>{formatCommentDate(comment.publishedAt)}</span>
 							</div>
-							<div className={styles.commentText}>{comment.textDisplay}</div>
+							<div
+								className={styles.commentText}
+								dangerouslySetInnerHTML={{ __html: comment.textDisplay }}></div>
+							{comment.likeCount > 0 && (
+								<div className={styles.commentLikes}>
+									👍 {comment.likeCount}
+								</div>
+							)}
 						</div>
 					</div>
 				))}
