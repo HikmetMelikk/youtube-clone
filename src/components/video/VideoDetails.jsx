@@ -78,7 +78,7 @@ function VideoDetails() {
 	const { snippet, statistics } = video;
 
 	return (
-		<>
+		<div className={styles.videoContainer}>
 			<section className={styles.video}>
 				<iframe
 					width="100%"
@@ -120,7 +120,7 @@ function VideoDetails() {
 					))}
 				</div>
 			</section>
-		</>
+		</div>
 	);
 }
 
