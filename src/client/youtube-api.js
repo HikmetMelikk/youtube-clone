@@ -7,6 +7,9 @@ const SEARCH_URL =
 const VIDEO_URL =
 	"https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&";
 
+const COMMENTS_URL =
+	"https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=20&";
+
 export default class YoutubeAPI {
 	constructor() {}
 
@@ -27,6 +30,13 @@ export default class YoutubeAPI {
 	static async getVideoDetails(videoId) {
 		return fetch(
 			`${VIDEO_URL}id=${videoId}&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`
+		).then((response) => response.json());
+	}
+	static async getVideoComments(videoId) {
+		return fetch(
+			`${COMMENTS_URL}videoId=${videoId}&key=${
+				import.meta.env.VITE_YOUTUBE_API_KEY
+			}`
 		).then((response) => response.json());
 	}
 }

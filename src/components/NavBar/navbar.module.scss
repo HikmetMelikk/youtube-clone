@@ -15,13 +15,16 @@
 		display: flex;
 		align-items: center;
 		gap: 1rem;
+
 		.youtubeIcon {
 			width: 100px;
 			height: 40px;
+
 			&:hover {
 				cursor: pointer;
 			}
 		}
+
 		.hamburger {
 			height: 24px;
 			width: 24px;
@@ -35,10 +38,12 @@
 		align-items: center;
 		width: 50%;
 		gap: 1rem;
+
 		.search {
 			display: flex;
 			align-items: center;
 			width: 100%;
+
 			input {
 				padding: 0.6rem 1.5rem;
 				border-radius: 40px 0 0 40px;
@@ -47,9 +52,11 @@
 				width: 100%;
 				font-size: 1rem;
 				outline: none;
+
 				::placeholder {
 					color: #606060;
 				}
+
 				&:focus {
 					border-color: #1c62b9;
 				}
@@ -61,6 +68,7 @@
 				border: 1px solid hsl(0, 0%, 18.82%);
 				border-left: none;
 				color: #606060;
+
 				&:hover {
 					cursor: pointer;
 				}
@@ -68,10 +76,12 @@
 		}
 	}
 }
+
 .iconStyles {
 	height: 24px;
 	width: 24px;
 }
+
 #search {
 	position: absolute;
 }
@@ -85,26 +95,31 @@
 	border-radius: 50%;
 	border: none;
 	background-color: rgba(70, 70, 70, 0.09);
+
 	img {
 		width: 100%;
 		height: 100%;
 		border-radius: 50%;
 		object-fit: cover;
 	}
+
 	&:hover {
 		cursor: pointer;
 	}
 }
+
 .microphone {
 	&:hover {
 		background-color: rgba(148, 142, 142, 0.1);
 	}
 }
+
 .navbarRight {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
 }
+
 .createContent {
 	display: flex;
 	align-items: center;
@@ -117,6 +132,7 @@
 	text-decoration: none;
 	font-weight: bold;
 	gap: 0.5rem;
+
 	&:hover {
 		cursor: pointer;
 	}
@@ -126,9 +142,11 @@
 	.navbarRight {
 		display: none;
 	}
+
 	.microphone {
 		display: none;
 	}
+
 	.hamburger {
 		display: none;
 	}
