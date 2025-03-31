@@ -4,6 +4,8 @@
 	width: 100%;
 	margin: 0 auto;
 	padding: 24px 16px;
+	font-family: "Roboto", Arial, sans-serif;
+	font-size: 10px;
 }
 
 .videoCard {
@@ -85,21 +87,18 @@
 			flex: 1;
 
 			.videoTitle {
-				font-size: 14px;
+				font-size: 16px;
 				font-weight: 500;
 				color: #fff;
 				margin-bottom: 6px;
 				line-height: 20px;
-				display: -webkit-box;
-				-webkit-line-clamp: 2;
-				-webkit-box-orient: vertical;
+				max-height: 40px;
 				overflow: hidden;
-				text-overflow: ellipsis;
 			}
 			.videoChannelAndViews {
 				display: flex;
 				flex-direction: column;
-				font-size: 12px;
+				font-size: 14px;
 				color: #aaa;
 
 				span {
