@@ -8,6 +8,7 @@ export default function VideoTopRow({
 	channelTitle,
 	channelId,
 	likeCount,
+	subscriberCount,
 }) {
 	return (
 		<>
@@ -23,23 +24,23 @@ export default function VideoTopRow({
 					</div>
 					<div className={styles.channelName}>
 						<p>{channelTitle}</p>
-						<span>Abone sayısı</span>
+						<span>{subscriberCount}</span>
 					</div>
 					<button>Abone Ol</button>
 				</div>
 
 				<div className={styles.videoTopRowButtons}>
 					<div className={styles.likeDislikeButtons}>
-						<button className={styles.like}>
+						<div className={styles.like}>
 							<BiLike className={styles.icon} />
 							<span className={styles.count}>
 								{parseInt(likeCount).toLocaleString()}
 							</span>
-						</button>
-						<span className={styles.divider}></span>
-						<button className={styles.dislike}>
+						</div>
+						<div className={styles.divider}></div>
+						<div className={styles.dislike}>
 							<BiDislike className={styles.icon} />
-						</button>
+						</div>
 					</div>
 					<button className={styles.share}>
 						<IoIosShareAlt className={styles.icon} />

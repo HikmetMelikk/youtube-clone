@@ -40,6 +40,7 @@ function SearchResultContent() {
 
 			{results.map((item) => (
 				<SearchResult
+					id={item.id.videoId}
 					key={item.id.videoId}
 					img={item.snippet?.thumbnails?.high?.url || ""}
 					duration={item.contentDetails?.duration || ""}

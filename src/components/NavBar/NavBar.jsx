@@ -1,23 +1,12 @@
-import { CiSearch } from "react-icons/ci";
-import { FiPlus } from "react-icons/fi";
-import { IoIosMenu, IoMdNotificationsOutline } from "react-icons/io";
-import { TbMicrophoneFilled } from "react-icons/tb";
-import emrethefuckingaka from "../../assets/emrethefuckingaka.png";
+import { IoIosMenu } from "react-icons/io";
 
-import { useState } from "react";
 import { useNavigate } from "react-router";
 import styles from "./navbar.module.scss";
+import NavbarRight from "./NavbarRight";
+import SearchBar from "./SearchBar";
 
 function NavBar() {
-	const [search, setSearch] = useState("");
 	const navigate = useNavigate();
-
-	const handleSearch = () => {
-		if (search.trim()) {
-			navigate(`/results?search_query=${search.trim()}`);
-		}
-	};
-
 	return (
 		<nav className={styles.navbar}>
 			<section className={styles.navbarLeft}>
@@ -66,46 +55,8 @@ function NavBar() {
 				</div>
 			</section>
 
-			<section className={styles.navbarCenter}>
-				<div className={styles.search}>
-					<input
-						type="text"
-						placeholder="Ara"
-						onChange={(e) => setSearch(e.target.value)}
-						onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-						value={search}
-					/>
-					<button
-						className={styles.navbarIcon}
-						onClick={() => {
-							console.log(search);
-						}}>
-						<CiSearch className={styles.iconStyles} id="search" />
-					</button>
-				</div>
-				<button className={`${styles.navbarIcon} ${styles.microphone}`}>
-					<TbMicrophoneFilled className={styles.iconStyles} />
-				</button>
-			</section>
-
-			<section className={styles.navbarRight}>
-				<button className={styles.createContent}>
-					<FiPlus className={styles.iconStyles} />
-					<span>Oluştur</span>
-				</button>
-
-				<button className={styles.navbarIcon}>
-					<IoMdNotificationsOutline className={styles.iconStyles} />
-				</button>
-				<div>
-					<img
-						src={emrethefuckingaka}
-						alt="profile"
-						className={styles.navbarIcon}
-						style={{ objectFit: "cover" }}
-					/>
-				</div>
-			</section>
+			<SearchBar />
+			<NavbarRight />
 		</nav>
 	);
 }

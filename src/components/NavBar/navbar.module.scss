@@ -27,11 +27,6 @@
 			width: 24px;
 		}
 	}
-	.navbarRight {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-	}
 
 	.navbarCenter {
 		display: flex;
@@ -105,6 +100,11 @@
 		background-color: rgba(148, 142, 142, 0.1);
 	}
 }
+.navbarRight {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
 .createContent {
 	display: flex;
 	align-items: center;
@@ -119,5 +119,17 @@
 	gap: 0.5rem;
 	&:hover {
 		cursor: pointer;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.navbarRight {
+		display: none;
+	}
+	.microphone {
+		display: none;
+	}
+	.hamburger {
+		display: none;
 	}
 }

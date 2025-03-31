@@ -7,6 +7,7 @@ export default function MoreVideosCard({
 	channelTitle,
 	thumbnail,
 	publishedAt,
+	viewCount,
 }) {
 	return (
 		<a href={`/watch?v=${videoId}`} className={styles.moreVideosCard}>
@@ -18,10 +19,10 @@ export default function MoreVideosCard({
 				/>
 			</div>
 			<div className={styles.videoChannelDetails}>
-				<h3 className={styles.videoTitle}>{title}</h3>
+				<h3 className={styles.moreVideoTitle}>{title}</h3>
 				<p className={styles.channelName}>{channelTitle}</p>
 				<div className={styles.videoViewDate}>
-					<p>Önerilen video</p>
+					<p>{viewCount}</p>
 					<p>{formatPublishDate(publishedAt)}</p>
 				</div>
 			</div>

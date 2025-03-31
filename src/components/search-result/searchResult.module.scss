@@ -141,3 +141,30 @@
 		}
 	}
 }
+@media (max-width: 768px) {
+	.searchResult {
+		flex-direction: column;
+
+		.thumbnail {
+			width: 100%;
+			height: 0;
+			padding-bottom: 56.25%;
+			position: relative;
+
+			img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		.details {
+			margin-left: 0;
+			margin-top: 12px;
+			height: auto;
+		}
+	}
+}
