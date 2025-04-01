@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { CiMenuKebab } from "react-icons/ci";
 import { useNavigate } from "react-router";
 import { formatViewCount } from "../../utils/format";
@@ -33,17 +32,4 @@ function Shorts({ id, title, thumbnail, views }) {
 	);
 }
 
-Shorts.propTypes = {
-	id: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-	thumbnail: PropTypes.string.isRequired,
-	views: PropTypes.string.isRequired,
-};
-
 export default Shorts;
-
-// regex
-// folder structure
-// video açılacak ve izlenecek
-// responsive
-// scss dosyaları düzenlenecek

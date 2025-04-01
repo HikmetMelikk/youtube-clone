@@ -1,36 +1,36 @@
+@import "../../../src/sass/variables.scss";
+@import "../../../src/sass/mixins.scss";
+
 * {
 	font-family: Roboto, Arial, sans-serif;
 }
 
 .searchResultContent {
-	display: flex;
-	flex-direction: column;
+	@include flex(column);
 	width: 100%;
 	margin: 0 auto;
 	max-width: 1200px;
 }
 
 .searchResult {
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
+	@include flex(row, flex-start, flex-start);
 	position: relative;
 	width: 100%;
-	padding: 8px;
-	border-radius: 12px;
+	padding: $spacing-sm;
+	border-radius: $border-radius-md;
 	transition: background-color 0.2s;
 	cursor: pointer;
-	margin-bottom: 8px;
+	margin-bottom: $spacing-sm;
 
 	&:hover {
-		background-color: rgba(255, 255, 255, 0.1);
+		background-color: $color-bg-light;
 	}
 
 	.thumbnail {
 		width: 440px;
 		height: 248px;
 		position: relative;
-		border-radius: 12px;
+		border-radius: $border-radius-md;
 		overflow: hidden;
 		flex-shrink: 0;
 		background-color: transparent;
@@ -42,15 +42,11 @@
 		}
 
 		.duration {
-			display: inline-flex;
-			justify-content: center;
-			align-items: center;
-			position: absolute;
-			bottom: 8px;
-			right: 8px;
+			@include flex(row, center, center);
+			@include absolute($bottom: $spacing-sm, $right: $spacing-sm);
 			background-color: rgba(0, 0, 0, 0.8);
-			color: white;
-			font-size: 12px;
+			color: $color-text-primary;
+			font-size: $font-size-sm;
 			font-weight: 500;
 			padding: 3px 4px;
 			border-radius: 4px;
@@ -58,55 +54,47 @@
 	}
 
 	.details {
-		display: flex;
-		flex-direction: column;
-		margin-left: 16px;
+		@include flex(column, flex-start, flex-start, $spacing-sm);
+		margin-left: $spacing-md;
 		width: 100%;
 		height: 202px;
-		justify-content: flex-start;
-		gap: 8px;
 
 		.header {
 			margin-bottom: 4px;
 		}
 
 		.title {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: flex-start;
+			@include flex(row, space-between, flex-start);
 			margin-bottom: 4px;
 
 			span {
-				font-size: 18px;
+				font-size: $font-size-lg + 2px; // 18px
 				font-weight: 500;
 				line-height: 1.4;
-				color: #f1f1f1;
-				margin-right: 24px;
+				color: $color-text-primary;
+				margin-right: $spacing-lg + 4px; // 24px
+				@include text-truncate(2);
 			}
 		}
 
 		.view {
-			color: #aaa;
-			font-size: 14px;
+			color: $color-text-secondary;
+			font-size: $font-size-md;
 			font-weight: 400;
 			margin-top: 0;
-			margin-bottom: 12px;
+			margin-bottom: $spacing-md - 4px; // 12px
 		}
 
 		.channel {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			gap: 8px;
-			color: #aaa;
-			font-size: 14px;
-			margin-bottom: 12px;
+			@include flex(row, flex-start, center, $spacing-sm);
+			color: $color-text-secondary;
+			font-size: $font-size-md;
+			margin-bottom: $spacing-md - 4px; // 12px
 
 			img {
-				width: 24px;
-				height: 24px;
-				border-radius: 50%;
+				width: $menu-icon-size; // 24px
+				height: $menu-icon-size; // 24px
+				border-radius: $border-radius-circle;
 				object-fit: cover;
 			}
 
@@ -116,45 +104,26 @@
 		}
 
 		.description {
-			font-size: 14px;
-			color: #aaa;
+			font-size: $font-size-md;
+			color: $color-text-secondary;
 			line-height: 1.4;
 		}
 	}
 }
 
 // Responsive adjustments
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-md) {
 	.searchResult {
 		flex-direction: column;
 
 		.thumbnail {
 			width: 100%;
 			height: 0;
-			padding-bottom: 56.25%;
-		}
-
-		.details {
-			margin-left: 0;
-			margin-top: 12px;
-			height: auto;
-		}
-	}
-}
-@media (max-width: 768px) {
-	.searchResult {
-		flex-direction: column;
-
-		.thumbnail {
-			width: 100%;
-			height: 0;
-			padding-bottom: 56.25%;
+			padding-bottom: 56.25%; // 16:9 aspect ratio
 			position: relative;
 
 			img {
-				position: absolute;
-				top: 0;
-				left: 0;
+				@include absolute(0, 0, 0, 0);
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
@@ -163,7 +132,7 @@
 
 		.details {
 			margin-left: 0;
-			margin-top: 12px;
+			margin-top: $spacing-md - 4px; // 12px
 			height: auto;
 		}
 	}

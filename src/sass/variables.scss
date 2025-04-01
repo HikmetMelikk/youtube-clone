@@ -1,0 +1,69 @@
+// Colors
+$color-text-primary: #fff;
+$color-text-secondary: #aaa;
+$color-error: #ff6b6b;
+$color-bg-hover: rgba(255, 255, 255, 0.2);
+$color-bg-light: rgba(255, 255, 255, 0.1);
+$color-bg-lighter: rgba(255, 255, 255, 0.05);
+
+// Typography
+$font-size-xs: 10px;
+$font-size-sm: 12px;
+$font-size-md: 14px;
+$font-size-lg: 16px;
+$font-size-xl: 1.5rem;
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 20px;
+$spacing-xl: 24px;
+
+// Border radius
+$border-radius-circle: 50%;
+$border-radius-sm: 10px;
+$border-radius-md: 12px;
+
+// Breakpoints
+$breakpoint-xs: 480px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Component specific
+$shorts-min-width: 180px;
+$shorts-aspect-ratio: 9/16;
+$icon-size: 36px;
+$menu-icon-size: 24px;
+
+// Container genişlikleri
+$container-mobile: 100%;
+$container-tablet: 720px;
+$container-desktop-small: 960px;
+$container-desktop: 1140px;
+$container-desktop-large: 1280px;
+
+// Ek renkler
+$color-bg-dark: #0f0f0f;
+$color-button-primary: #fff;
+$color-button-text: #0f0f0f;
+$color-button-blue: #3ea6ff;
+$color-hover-medium: rgba(255, 255, 255, 0.2);
+$color-divider: rgba(255, 255, 255, 0.3);
+
+// Bileşen boyutları
+$border-radius-round: 18px;
+$avatar-size-desktop: 40px;
+$avatar-size-mobile: 36px;
+$button-height-desktop: 36px;
+$button-height-mobile: 32px;
+
+// Tipografi eklentileri
+$font-size-base: 0.9rem;
+$line-height-sm: 1.2rem;
+$line-height-base: 1.4rem;
+$line-height-md: 1.6rem;
+$line-height-lg: 2.2rem;

@@ -1,176 +1,11 @@
-// -----------------------------------------------------------------------------
-// 1. Değişkenler
-// -----------------------------------------------------------------------------
+@import "../../../src/sass/variables.scss";
+@import "../../../src/sass/mixins.scss";
 
-// Ekran boyutları
-$mobile-small: 480px;
-$mobile: 576px;
-$tablet: 768px;
-$desktop-small: 992px;
-$desktop: 1200px;
+$video-player-min-height: 300px;
+$video-player-max-height: calc(100vh - 169px);
+$comment-list-gap-desktop: $spacing-xl;
+$comment-list-gap-mobile: $spacing-lg;
 
-// Container genişlikleri
-$container-mobile: 100%;
-$container-tablet: 720px;
-$container-desktop-small: 960px;
-$container-desktop: 1140px;
-$container-desktop-large: 1280px;
-
-// Renkler
-$color-bg-dark: #0f0f0f;
-$color-text-primary: #fff;
-$color-text-secondary: #aaa;
-$color-button-primary: #fff;
-$color-button-text: #0f0f0f;
-$color-button-blue: #3ea6ff;
-$color-hover-light: rgba(255, 255, 255, 0.1);
-$color-hover-medium: rgba(255, 255, 255, 0.2);
-$color-divider: rgba(255, 255, 255, 0.3);
-
-// Boyutlar
-$border-radius-sm: 8px;
-$border-radius-md: 12px;
-$border-radius-round: 18px;
-$avatar-size-desktop: 40px;
-$avatar-size-mobile: 36px;
-$button-height-desktop: 36px;
-$button-height-mobile: 32px;
-
-// Boşluklar
-$spacing-xs: 4px;
-$spacing-sm: 8px;
-$spacing-md: 12px;
-$spacing-lg: 16px;
-$spacing-xl: 24px;
-
-// Tipografi
-$font-size-xs: 0.75rem;
-$font-size-sm: 0.8rem;
-$font-size-base: 0.9rem;
-$font-size-md: 1rem;
-$font-size-lg: 1.2rem;
-$line-height-sm: 1.2rem;
-$line-height-base: 1.4rem;
-$line-height-md: 1.6rem;
-$line-height-lg: 2.2rem;
-
-// -----------------------------------------------------------------------------
-// 2. Mixinler
-// -----------------------------------------------------------------------------
-
-// Medya sorguları için mixinler
-@mixin mobile-small {
-	@media screen and (max-width: $mobile-small) {
-		@content;
-	}
-}
-
-@mixin mobile {
-	@media screen and (max-width: $mobile) {
-		@content;
-	}
-}
-
-@mixin tablet {
-	@media screen and (max-width: $tablet) {
-		@content;
-	}
-}
-
-@mixin desktop-small {
-	@media screen and (max-width: $desktop-small) {
-		@content;
-	}
-}
-
-@mixin desktop {
-	@media screen and (max-width: $desktop) {
-		@content;
-	}
-}
-
-@mixin min-tablet {
-	@media screen and (min-width: $tablet) {
-		@content;
-	}
-}
-
-@mixin min-desktop {
-	@media screen and (min-width: $desktop) {
-		@content;
-	}
-}
-
-// Metni kırpma ve elipsis
-@mixin text-truncate($lines: 2) {
-	overflow: hidden;
-	display: block;
-	display: -webkit-box;
-	-webkit-line-clamp: $lines;
-	-webkit-box-orient: vertical;
-	text-overflow: ellipsis;
-	white-space: normal;
-}
-
-// Düğme temel stili
-@mixin button-base {
-	border: none;
-	cursor: pointer;
-	font-weight: 500;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	@include mobile {
-		font-size: $font-size-base;
-		padding: 0 $spacing-md;
-		height: $button-height-mobile;
-	}
-}
-
-// Yuvarlak düğme stili
-@mixin button-round($bg-color: $color-hover-light) {
-	@include button-base;
-	background-color: $bg-color;
-	border-radius: $border-radius-round;
-	height: $button-height-desktop;
-	padding: 0 $spacing-lg;
-
-	&:hover {
-		background-color: $color-hover-medium;
-	}
-}
-
-// Avatar stili
-@mixin avatar($size: $avatar-size-desktop) {
-	width: $size;
-	height: $size;
-	border-radius: 50%;
-	overflow: hidden;
-
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	@include mobile {
-		width: $avatar-size-mobile;
-		height: $avatar-size-mobile;
-	}
-}
-
-// İki satırlı başlık stili
-@mixin video-title {
-	font-weight: 700;
-	@include text-truncate(2);
-}
-
-// -----------------------------------------------------------------------------
-// 3. Stil Tanımları
-// -----------------------------------------------------------------------------
-
-// Video konteynırı
 .videoContainer {
 	width: 100%;
 	max-width: 100%;
@@ -189,24 +24,20 @@ $line-height-lg: 2.2rem;
 
 	@include tablet {
 		max-width: $container-tablet;
-		padding: 0;
 	}
 
 	@include mobile {
 		max-width: $container-mobile;
-		padding: 0;
 	}
 }
 
-// Video oynatıcı
 .video {
-	display: flex;
-	flex-direction: row;
+	@include flex(row);
 	position: relative;
 	width: 100%;
-	height: 56.25vw; // 16:9 aspect ratio
-	max-height: calc(100vh - 169px);
-	min-height: 300px;
+	height: 56.25vw;
+	max-height: $video-player-max-height;
+	min-height: $video-player-min-height;
 	overflow-x: clip;
 	background: $color-bg-dark;
 
@@ -218,667 +49,561 @@ $line-height-lg: 2.2rem;
 	@include min-desktop {
 		min-height: 480px;
 	}
-
-	@include tablet {
-		height: 56.25vw;
-	}
 }
 
-// Video detayları bölümü
 .videoViewDetails {
-	display: flex;
-	flex-direction: row;
+	@include flex(row);
 	flex: 1;
 	margin: 0 auto;
 
 	@include tablet {
 		flex-direction: column;
-		gap: 1rem;
-		padding: 0;
+		gap: $spacing-md;
+	}
+}
+
+.videoDetails {
+	@include flex(column);
+	flex: 1;
+	gap: $spacing-xs;
+	padding: 0 $spacing-xl;
+
+	@include desktop-small {
+		padding-right: $spacing-md;
 	}
 
-	// Video bilgileri
-	.videoDetails {
-		display: flex;
-		flex: 1;
-		flex-direction: column;
-		gap: .3rem;
-		padding-right: 2rem;
-		padding-left: 2rem;
+	@include tablet {
+		padding: 0 $spacing-sm;
+		gap: $spacing-sm;
+	}
 
-		@include desktop-small {
-			padding-right: 1rem;
-		}
+	.videoTitle {
+		margin-top: $spacing-sm;
+		font-size: $font-size-xl - 0.2rem;
+		line-height: $line-height-lg;
+		max-height: 5.6rem;
+		@include video-title;
 
 		@include tablet {
-			margin-left: 0;
-			padding: 0 $spacing-sm;
+			font-size: $font-size-md;
+			line-height: $line-height-base;
+			max-height: 2.8rem;
+			margin-top: $spacing-sm;
+		}
+	}
+}
+
+.videoTopRow {
+	@include flex(row, space-between, center);
+
+	@include tablet {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: $spacing-sm;
+	}
+
+	.channelInformation {
+		@include flex(row, flex-start, center);
+		gap: $spacing-md;
+
+		@include tablet {
+			width: 100%;
 			gap: $spacing-sm;
 		}
 
-		// Video başlığı
-		.videoTitle {
-			margin-top: $spacing-sm;
-			font-size: $font-size-lg;
-			line-height: $line-height-lg;
-			max-height: 5.6rem;
-			@include video-title;
+		.channelAvatar {
+			@include avatar;
+		}
 
-			@include tablet {
+		.channelName {
+			@include flex(column);
+			flex: 1;
+
+			p {
 				font-size: $font-size-md;
-				line-height: $line-height-base;
-				max-height: 2.8rem;
-				margin: 0.75rem 0 0;
-			}
-		}
-
-		// Video üst satır düzeni
-		.videoTopRow {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-
-			@include tablet {
-				flex-direction: column;
-				align-items: flex-start;
-				gap: 0.75rem;
-				padding: 0 $spacing-sm;
-			}
-		}
-
-		// Kanal bilgileri
-		.channelInformation {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			gap: 1rem;
-
-			@include tablet {
-				width: 100%;
-				gap: 0.75rem;
-			}
-
-			.channelAvatar {
-				@include avatar;
-			}
-
-			.channelName {
-				display: flex;
-				flex-direction: column;
-				flex: 1;
-
-				p {
-					font-size: $font-size-md;
-					font-weight: 500;
-
-					@include mobile {
-						font-size: $font-size-base;
-					}
-				}
-
-				span {
-					font-size: $font-size-sm;
-					line-height: $line-height-md;
-					color: $color-text-secondary;
-
-					@include mobile {
-						font-size: $font-size-xs;
-						line-height: $line-height-sm;
-					}
-				}
-			}
-
-			button {
-				background-color: $color-button-primary;
-				color: $color-button-text;
-				border: none;
-				padding: 0 $spacing-md;
-				height: $button-height-desktop;
-				font-size: 14px;
-				font-weight: 600;
-				line-height: $button-height-desktop;
-				border-radius: $border-radius-round;
-				cursor: pointer;
-
-				&:hover {
-					background-color: #e1e0e0;
-				}
+				font-weight: 500;
 
 				@include mobile {
-					height: $button-height-mobile;
-					line-height: $button-height-mobile;
-					font-size: 13px;
-					padding: 0 $spacing-sm;
+					font-size: $font-size-base;
 				}
 			}
-		}
 
-		// Video üst satır butonları
-		.videoTopRowButtons {
-			display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
-			align-items: center;
-			gap: 1rem;
-			position: relative;
-
-			@include tablet {
-				width: 100%;
-				gap: $spacing-sm;
-				flex-wrap: wrap;
-			}
-
-			// Beğen/beğenme butonları
-			.likeDislikeButtons {
-				display: flex;
-				align-items: center;
-				background-color: $color-hover-light;
-				border-radius: $border-radius-round;
-				height: $button-height-desktop;
+			span {
+				font-size: $font-size-sm;
+				line-height: $line-height-md;
+				color: $color-text-secondary;
 
 				@include mobile {
-					height: $button-height-mobile;
-				}
-
-				.like,
-				.dislike {
-					display: flex;
-					align-items: center;
-					padding: 0 $spacing-lg;
-					height: 100%;
-					cursor: pointer;
-
-					&:hover {
-						background-color: $color-hover-medium;
-					}
-
-					@include mobile {
-						padding: 0 $spacing-md;
-					}
-				}
-
-				.like {
-					border-radius: $border-radius-round 0 0 $border-radius-round;
-
-					.count {
-						margin-left: 6px;
-
-						@include mobile {
-							margin-left: $spacing-xs;
-							font-size: 13px;
-						}
-					}
-				}
-
-				.divider {
-					width: 1px;
-					height: 24px;
-					background-color: $color-divider;
-
-					@include mobile {
-						height: 20px;
-					}
-				}
-
-				.dislike {
-					border-radius: 0 $border-radius-round $border-radius-round 0;
-				}
-			}
-
-			// Paylaş ve indir butonları
-			.share,
-			.download {
-				@include button-round;
-
-				.icon {
-					width: 20px;
-					height: 20px;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					margin-right: $spacing-sm;
-
-					@include mobile {
-						width: 18px;
-						height: 18px;
-						margin-right: 6px;
-					}
+					font-size: $font-size-xs;
+					line-height: $line-height-sm;
 				}
 			}
 		}
 
-		// Video alt satır
-		.videoBottomRow {
-			position: relative;
-			width: 100%;
-			margin-right: $spacing-md;
-			margin-top: $spacing-md;
-			border-radius: $border-radius-md;
-			background-color: $color-hover-light;
-			padding: $spacing-md;
-			display: flex;
-			flex-direction: column;
+		button {
+			background-color: $color-button-primary;
+			color: $color-button-text;
+			border: none;
+			padding: 0 $spacing-md;
+			height: $button-height-desktop;
+			font-size: $font-size-md;
+			font-weight: 600;
+			border-radius: $border-radius-round;
+			cursor: pointer;
 
-			@include tablet {
-				margin-right: 0;
-				margin-top: $spacing-sm;
-				border-radius: 0;
-				background-color: transparent;
+			&:hover {
+				background-color: darken($color-button-primary, 5%);
+			}
+
+			@include mobile {
+				height: $button-height-mobile;
+				font-size: $font-size-sm;
 				padding: 0 $spacing-sm;
-			}
-
-			// Video istatistikleri
-			.videoStats {
-				display: flex;
-				flex-direction: row;
-				gap: 1rem;
-
-				@include mobile {
-					gap: $spacing-sm;
-					flex-wrap: wrap;
-				}
-
-				.videoViews,
-				.videoDate {
-					color: $color-text-primary;
-					font-size: 14px;
-					font-weight: 500;
-
-					@include mobile {
-						font-size: 13px;
-						color: $color-text-secondary;
-					}
-				}
-			}
-
-			// Video açıklaması
-			.videoDescriptionContainer {
-				margin-top: $spacing-md;
-				width: 100%;
-
-				@include tablet {
-					background-color: $color-hover-light;
-					margin-top: $spacing-sm;
-					border-radius: 1rem;
-					padding: $spacing-md;
-				}
-
-				.videoDescription {
-					font-size: 14px;
-					line-height: 20px;
-					color: $color-text-primary;
-					white-space: pre-line;
-					max-height: 60px;
-					overflow: hidden;
-					transition: max-height 0.3s ease;
-
-					@include mobile {
-						font-size: 13px;
-						line-height: 18px;
-						max-height: 54px;
-					}
-				}
-
-				&.expanded .videoDescription {
-					max-height: unset;
-				}
-
-				.showMoreButton {
-					background: none;
-					border: none;
-					color: $color-text-secondary;
-					font-size: 14px;
-					font-weight: 500;
-					padding: $spacing-sm 0;
-					cursor: pointer;
-					display: block;
-					width: max-content;
-					margin-top: $spacing-sm;
-
-					@include mobile {
-						font-size: 13px;
-						padding: 6px 0;
-						margin-top: $spacing-xs;
-					}
-
-					&:hover {
-						color: $color-text-primary;
-					}
-				}
-			}
-		}
-
-		// Yorumlar bölümü
-		.videoComments {
-			margin-top: $spacing-xl;
-			width: 100%;
-
-			@include tablet {
-				display: none; // Mobil görünümde yorumları gizle
-				margin-top: $spacing-lg;
-				padding: 0 $spacing-sm;
-			}
-
-			// Yorum girişi
-			.commentInput {
-				display: flex;
-				align-items: center;
-				margin-bottom: 32px;
-				position: relative;
-
-				@include tablet {
-					margin-bottom: 20px;
-				}
-
-				input {
-					flex: 1;
-					background-color: transparent;
-					border: none;
-					border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-					padding: $spacing-sm 0;
-					font-size: 14px;
-					color: $color-text-primary;
-					outline: none;
-
-					@include mobile {
-						font-size: 13px;
-						padding: 6px 0;
-					}
-
-					&::placeholder {
-						color: $color-text-secondary;
-					}
-
-					&:focus {
-						border-bottom: 2px solid $color-button-blue;
-					}
-				}
-
-				button {
-					background-color: $color-button-blue;
-					color: $color-button-text;
-					border: none;
-					border-radius: $border-radius-round;
-					font-size: 14px;
-					font-weight: 500;
-					padding: 0 $spacing-lg;
-					height: $button-height-desktop;
-					cursor: pointer;
-					margin-left: $spacing-lg;
-					opacity: 0.7;
-					transition: opacity 0.2s;
-
-					@include mobile {
-						font-size: 13px;
-						padding: 0 $spacing-md;
-						height: $button-height-mobile;
-						margin-left: $spacing-md;
-					}
-
-					&:hover {
-						opacity: 1;
-					}
-				}
-			}
-
-			// Yorum listesi
-			.commentList {
-				display: flex;
-				flex-direction: column;
-				gap: $spacing-xl;
-
-				@include tablet {
-					gap: $spacing-lg;
-				}
-
-				// Tek yorum
-				.comment {
-					display: flex;
-					gap: $spacing-lg;
-
-					@include mobile {
-						gap: $spacing-md;
-					}
-
-					.commentAvatar {
-						@include avatar;
-						flex-shrink: 0;
-					}
-
-					.commentContent {
-						flex: 1;
-						overflow: hidden;
-
-						.commentHeader {
-							display: flex;
-							align-items: baseline;
-							margin-bottom: $spacing-xs;
-
-							p {
-								font-size: 13px;
-								font-weight: 500;
-								margin: 0;
-								margin-right: $spacing-sm;
-
-								@include mobile {
-									font-size: 12px;
-								}
-							}
-
-							span {
-								font-size: 12px;
-								color: $color-text-secondary;
-
-								@include mobile {
-									font-size: 11px;
-								}
-							}
-						}
-
-						.commentText {
-							font-size: 14px;
-							line-height: 20px;
-							color: $color-text-primary;
-							margin-bottom: $spacing-sm;
-							word-wrap: break-word;
-
-							@include mobile {
-								font-size: 13px;
-								line-height: 18px;
-							}
-						}
-
-						.commentActions {
-							display: flex;
-							gap: $spacing-lg;
-							margin-top: $spacing-sm;
-
-							@include mobile {
-								gap: $spacing-md;
-								margin-top: 6px;
-							}
-
-							button {
-								background: none;
-								border: none;
-								color: $color-text-secondary;
-								font-size: 12px;
-								display: flex;
-								align-items: center;
-								gap: $spacing-xs;
-								cursor: pointer;
-								padding: $spacing-xs $spacing-sm;
-								border-radius: $spacing-lg;
-
-								@include mobile {
-									font-size: 11px;
-									padding: 3px 6px;
-								}
-
-								&:hover {
-									background-color: $color-hover-light;
-								}
-							}
-						}
-					}
-
-					&:hover {
-						.commentActions {
-							opacity: 1;
-						}
-					}
-				}
 			}
 		}
 	}
 
-	// Benzer videolar
-	.moreVideos {
-		padding-right: $spacing-xl;
-		width: 402px;
-		min-width: 300px;
-		margin-top: $spacing-xl;
-		display: flex;
-		flex-direction: column;
+	.videoTopRowButtons {
+		@include flex(row, flex-start, center);
 		gap: $spacing-md;
-
-		@include desktop-small {
-			width: 350px;
-			min-width: 280px;
-			padding-right: $spacing-lg;
-		}
+		position: relative;
 
 		@include tablet {
 			width: 100%;
-			padding: 0 $spacing-sm;
-			margin-top: $spacing-lg;
-			min-width: 0;
+			gap: $spacing-sm;
+			flex-wrap: wrap;
 		}
 
-		// Benzer video kartı
-		.moreVideosCard {
-			display: flex;
-			flex-direction: row;
-			gap: $spacing-md;
-			margin-bottom: 0;
-			text-decoration: none;
-			cursor: pointer;
-			padding: $spacing-sm;
-			border-radius: $border-radius-sm;
-			transition: background-color 0.2s;
+		.likeDislikeButtons {
+			@include flex(row, center, center);
+			background-color: $color-bg-light;
+			border-radius: $border-radius-round;
+			height: $button-height-desktop;
 
-			@include tablet {
-				flex-direction: column;
-				width: 100%;
-				gap: $spacing-sm;
-				padding: $spacing-xs;
+			@include mobile {
+				height: $button-height-mobile;
 			}
 
-			&:hover {
-				background-color: $color-hover-light;
-			}
+			.like,
+			.dislike {
+				@include flex(row, center, center);
+				padding: 0 $spacing-md;
+				height: 100%;
+				cursor: pointer;
 
-			// Önizleme resmi
-			.thumbnail {
-				margin-right: 0;
-				height: 94px;
-				width: 168px;
-				min-width: 168px;
-				border-radius: $border-radius-sm;
-				overflow: hidden;
-				background-color: #333;
-
-				@include tablet {
-					height: 80px;
-					width: 142px;
-					min-width: 142px;
+				&:hover {
+					background-color: $color-bg-hover;
 				}
 
-				@include mobile-small {
-					height: 100%;
-					width: 100%;
-				}
-
-				img {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
+				@include mobile {
+					padding: 0 $spacing-sm;
 				}
 			}
 
-			// Video ve kanal detayları
-			.videoChannelDetails {
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-				flex: 1;
-				height: 94px;
-				overflow: hidden;
+			.like {
+				border-radius: $border-radius-round 0 0 $border-radius-round;
 
-				@include tablet {
-					height: 80px;
-				}
+				.count {
+					margin-left: $spacing-xs;
 
-				@include mobile-small {
-					height: 72px;
-				}
-
-				// Video başlığı
-				.moreVideoTitle {
-					font-size: 0.95rem;
-					color: $color-text-primary;
-					margin: 0 0 $spacing-xs 0;
-					@include video-title;
-
-					@include tablet {
-						font-size: 0.85rem;
-						max-height: 2.4rem;
-						margin-bottom: 2px;
+					@include mobile {
+						font-size: $font-size-sm;
 					}
 				}
+			}
 
-				// Kanal adı
-				.channelName {
-					font-size: $font-size-sm;
-					color: $color-text-secondary;
-					margin: 0 0 $spacing-xs 0;
+			.divider {
+				width: 1px;
+				height: 24px;
+				background-color: $color-divider;
 
-					@include tablet {
-						font-size: $font-size-xs;
-						margin-bottom: 2px;
-					}
+				@include mobile {
+					height: 20px;
 				}
+			}
 
-				// İzlenme ve tarih bilgisi
-				.videoViewDate {
-					display: flex;
-					flex-direction: row;
-					font-size: $font-size-sm;
-					color: $color-text-secondary;
-					gap: $spacing-sm;
+			.dislike {
+				border-radius: 0 $border-radius-round $border-radius-round 0;
+			}
+		}
 
-					@include tablet {
-						font-size: $font-size-xs;
-						gap: 6px;
-					}
+		.share,
+		.download {
+			@include button-round;
 
-					p {
-						margin: 0;
-					}
+			.icon {
+				width: 20px;
+				height: 20px;
+				@include flex(row, center, center);
+				margin-right: $spacing-sm;
+
+				@include mobile {
+					width: 18px;
+					height: 18px;
+					margin-right: $spacing-xs;
 				}
 			}
 		}
 	}
 }
 
-// Yükleme ve hata durumları
+.videoBottomRow {
+	position: relative;
+	width: 100%;
+	margin-top: $spacing-md;
+	border-radius: $border-radius-md;
+	background-color: $color-bg-light;
+	padding: $spacing-md;
+	@include flex(column);
+
+	@include tablet {
+		margin-top: $spacing-sm;
+		border-radius: 0;
+		background-color: transparent;
+		padding: 0 $spacing-sm;
+	}
+
+	.videoStats {
+		@include flex(row);
+		gap: $spacing-md;
+
+		@include mobile {
+			gap: $spacing-sm;
+			flex-wrap: wrap;
+		}
+
+		.videoViews,
+		.videoDate {
+			color: $color-text-primary;
+			font-size: $font-size-md;
+			font-weight: 500;
+
+			@include mobile {
+				font-size: $font-size-sm;
+				color: $color-text-secondary;
+			}
+		}
+	}
+
+	.videoDescriptionContainer {
+		margin-top: $spacing-md;
+		width: 100%;
+
+		@include tablet {
+			background-color: $color-bg-light;
+			margin-top: $spacing-sm;
+			border-radius: $border-radius-md;
+			padding: $spacing-md;
+		}
+
+		.videoDescription {
+			font-size: $font-size-md;
+			line-height: $line-height-md;
+			color: $color-text-primary;
+			white-space: pre-line;
+			max-height: 60px;
+			overflow: hidden;
+			transition: max-height 0.3s ease;
+
+			@include mobile {
+				font-size: $font-size-sm;
+				line-height: $line-height-sm;
+				max-height: 54px;
+			}
+		}
+
+		&.expanded .videoDescription {
+			max-height: unset;
+		}
+
+		.showMoreButton {
+			background: none;
+			border: none;
+			color: $color-text-secondary;
+			font-size: $font-size-md;
+			font-weight: 500;
+			padding: $spacing-sm 0;
+			cursor: pointer;
+			display: block;
+			width: max-content;
+			margin-top: $spacing-sm;
+
+			@include mobile {
+				font-size: $font-size-sm;
+				padding: $spacing-xs 0;
+			}
+
+			&:hover {
+				color: $color-text-primary;
+			}
+		}
+	}
+}
+
+.videoComments {
+	margin-top: $spacing-xl;
+	width: 100%;
+
+	@include tablet {
+		display: none;
+		margin-top: $spacing-lg;
+	}
+
+	.commentInput {
+		@include flex(row, flex-start, center);
+		margin-bottom: $spacing-xl;
+		position: relative;
+
+		@include tablet {
+			margin-bottom: $spacing-lg;
+		}
+
+		input {
+			flex: 1;
+			background-color: transparent;
+			border: none;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+			padding: $spacing-sm 0;
+			font-size: $font-size-md;
+			color: $color-text-primary;
+			outline: none;
+
+			@include mobile {
+				font-size: $font-size-sm;
+				padding: $spacing-xs 0;
+			}
+
+			&::placeholder {
+				color: $color-text-secondary;
+			}
+
+			&:focus {
+				border-bottom: 2px solid $color-button-blue;
+			}
+		}
+
+		button {
+			background-color: $color-button-blue;
+			color: $color-button-text;
+			border: none;
+			border-radius: $border-radius-round;
+			font-size: $font-size-md;
+			font-weight: 500;
+			padding: 0 $spacing-md;
+			height: $button-height-desktop;
+			cursor: pointer;
+			margin-left: $spacing-md;
+			opacity: 0.7;
+			transition: opacity 0.2s;
+
+			@include mobile {
+				font-size: $font-size-sm;
+				padding: 0 $spacing-sm;
+				height: $button-height-mobile;
+			}
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+
+	.commentList {
+		@include flex(column);
+		gap: $comment-list-gap-desktop;
+
+		@include tablet {
+			gap: $comment-list-gap-mobile;
+		}
+
+		.comment {
+			@include flex(row, flex-start, flex-start);
+			gap: $spacing-md;
+
+			@include mobile {
+				gap: $spacing-sm;
+			}
+
+			.commentAvatar {
+				@include avatar;
+				flex-shrink: 0;
+			}
+
+			.commentContent {
+				flex: 1;
+				overflow: hidden;
+
+				.commentHeader {
+					@include flex(row, flex-start, baseline);
+					margin-bottom: $spacing-xs;
+
+					p {
+						font-size: $font-size-sm;
+						font-weight: 500;
+						margin: 0 $spacing-sm 0 0;
+
+						@include mobile {
+							font-size: $font-size-xs;
+						}
+					}
+
+					span {
+						font-size: $font-size-xs;
+						color: $color-text-secondary;
+					}
+				}
+
+				.commentText {
+					font-size: $font-size-md;
+					line-height: $line-height-md;
+					color: $color-text-primary;
+					margin-bottom: $spacing-sm;
+					word-wrap: break-word;
+
+					@include mobile {
+						font-size: $font-size-sm;
+						line-height: $line-height-sm;
+					}
+				}
+
+				.commentLikes {
+					font-size: $font-size-sm;
+					color: $color-text-secondary;
+					margin-top: $spacing-xs;
+				}
+			}
+		}
+	}
+}
+
+.moreVideos {
+	padding-right: $spacing-md;
+	width: 402px;
+	min-width: 300px;
+	margin-top: $spacing-xl;
+	@include flex(column);
+	gap: $spacing-sm;
+
+	@include desktop-small {
+		width: 350px;
+		min-width: 280px;
+	}
+
+	@include tablet {
+		width: 100%;
+		padding: 0 $spacing-sm;
+		min-width: 0;
+	}
+
+	.moreVideosCard {
+		@include flex(row, flex-start, flex-start);
+		gap: $spacing-sm;
+		text-decoration: none;
+		cursor: pointer;
+		padding: $spacing-sm;
+		border-radius: $border-radius-sm;
+		transition: background-color 0.2s;
+
+		@include tablet {
+			flex-direction: column;
+			width: 100%;
+		}
+
+		&:hover {
+			background-color: $color-bg-light;
+		}
+
+		.thumbnail {
+			height: 94px;
+			width: 168px;
+			min-width: 168px;
+			border-radius: $border-radius-sm;
+			overflow: hidden;
+			background-color: rgba(255, 255, 255, 0.05);
+
+			@include tablet {
+				height: 100%;
+				width: 100%;
+				min-width: 100%;
+			}
+
+			@include mobile-small {
+				height: 100%;
+				width: 100%;
+				min-width: 100%;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		.videoChannelDetails {
+			@include flex(column, space-between, flex-start);
+			flex: 1;
+			height: 94px;
+			overflow: hidden;
+
+			@include tablet {
+				height: 80px;
+			}
+
+			@include mobile-small {
+				height: 70px;
+			}
+
+			.moreVideoTitle {
+				font-size: $font-size-md;
+				color: $color-text-primary;
+				margin: 0 0 $spacing-xs 0;
+				@include video-title;
+
+				@include tablet {
+					font-size: $font-size-sm;
+					max-height: 2.4rem;
+				}
+			}
+
+			.channelName {
+				font-size: $font-size-sm;
+				color: $color-text-secondary;
+				margin: 0 0 $spacing-xs 0;
+
+				@include tablet {
+					font-size: $font-size-xs;
+				}
+			}
+
+			.videoViewDate {
+				@include flex(row);
+				font-size: $font-size-sm;
+				color: $color-text-secondary;
+				gap: $spacing-sm;
+
+				@include tablet {
+					font-size: $font-size-xs;
+					gap: $spacing-xs;
+				}
+
+				p {
+					margin: 0;
+				}
+			}
+		}
+	}
+}
+
 .loading,
 .error {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	@include flex(row, center, center);
 	height: 200px;
 	width: 100%;
 	font-size: $font-size-md;
 	color: $color-text-secondary;
+}
+
+.error {
+	color: $color-error;
 }

@@ -1,0 +1,160 @@
+@import "variables";
+
+@mixin hide-scrollbar {
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	/* Hide scrollbar for IE, Edge and Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+// Text truncation with ellipsis
+@mixin text-truncate($lines: 1) {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: $lines;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+}
+
+// Flexbox setup
+@mixin flex(
+	$direction: row,
+	$justify: flex-start,
+	$align: flex-start,
+	$gap: 0
+) {
+	display: flex;
+	flex-direction: $direction;
+	justify-content: $justify;
+	align-items: $align;
+	@if $gap > 0 {
+		gap: $gap;
+	}
+}
+
+// Responsive grid
+@mixin responsive-grid($columns) {
+	display: grid;
+	grid-template-columns: repeat($columns, 1fr);
+	gap: $spacing-md;
+}
+
+// Absolute positioning
+@mixin absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
+	position: absolute;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+}
+
+// Icon container
+@mixin icon-container($size, $bg-color: transparent, $is-rounded: false) {
+	width: $size;
+	height: $size;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $bg-color;
+	@if $is-rounded {
+		border-radius: $border-radius-circle;
+	}
+}
+
+// Media query mixins
+@mixin mobile-small {
+	@media screen and (max-width: $breakpoint-xs) {
+		@content;
+	}
+}
+
+@mixin mobile {
+	@media screen and (max-width: $breakpoint-sm) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media screen and (max-width: $breakpoint-md) {
+		@content;
+	}
+}
+
+@mixin desktop-small {
+	@media screen and (max-width: $breakpoint-lg) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media screen and (max-width: $breakpoint-xl) {
+		@content;
+	}
+}
+
+@mixin min-tablet {
+	@media screen and (min-width: $breakpoint-md) {
+		@content;
+	}
+}
+
+@mixin min-desktop {
+	@media screen and (min-width: $breakpoint-xl) {
+		@content;
+	}
+}
+
+// Button styles
+@mixin button-base {
+	border: none;
+	cursor: pointer;
+	font-weight: 500;
+	@include flex(row, center, center);
+
+	@include mobile {
+		font-size: $font-size-base;
+		padding: 0 $spacing-md;
+		height: $button-height-mobile;
+	}
+}
+
+@mixin button-round($bg-color: $color-bg-light) {
+	@include button-base;
+	background-color: $bg-color;
+	border-radius: $border-radius-round;
+	height: $button-height-desktop;
+	padding: 0 $spacing-lg;
+
+	&:hover {
+		background-color: $color-hover-medium;
+	}
+}
+
+// Avatar style
+@mixin avatar($size: $avatar-size-desktop) {
+	width: $size;
+	height: $size;
+	border-radius: $border-radius-circle;
+	overflow: hidden;
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@include mobile {
+		width: $avatar-size-mobile;
+		height: $avatar-size-mobile;
+	}
+}
+
+// Video title style
+@mixin video-title {
+	font-weight: 700;
+
+	@include text-truncate(2);
+}
