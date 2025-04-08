@@ -5,12 +5,12 @@ import styles from "./navbar.module.scss";
 import NavbarRight from "./NavbarRight";
 import SearchBar from "./SearchBar";
 
-function NavBar() {
+function NavBar({ onMenuClick }) {
 	const navigate = useNavigate();
 	return (
 		<nav className={styles.navbar}>
 			<section className={styles.navbarLeft}>
-				<IoIosMenu className={styles.hamburger} />
+				<IoIosMenu className={styles.hamburger} onClick={onMenuClick} />
 				<div className={styles.youtubeIcon} onClick={() => navigate("/")}>
 					<span className={styles.youtubeIcon}>
 						<div

@@ -3,3 +3,37 @@
 	margin: 0;
 	padding: 0;
 }
+
+.app-container {
+	display: flex;
+	width: 100%;
+	height: calc(100vh - 56px); // Navbar yüksekliğine göre
+}
+
+.main-content {
+	flex: 1;
+	margin-left: 240px; // Sidebar genişliği
+	transition: margin-left 0.2s ease-in-out;
+	overflow-y: auto;
+
+	&.sidebar-collapsed {
+		margin-left: 72px;
+	}
+}
+
+// Media sorgularını ekleyin
+@media (max-width: 768px) {
+	.main-content {
+		margin-left: 72px;
+
+		&.sidebar-collapsed {
+			margin-left: 0;
+		}
+	}
+}
+
+@media (max-width: 576px) {
+	.main-content {
+		margin-left: 0;
+	}
+}

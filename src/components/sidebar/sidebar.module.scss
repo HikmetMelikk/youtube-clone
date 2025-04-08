@@ -1,0 +1,105 @@
+@import "../../../src/sass/variables.scss";
+@import "../../../src/sass/mixins.scss";
+
+.divider {
+	height: 1px;
+	background-color: $color-bg-light;
+	margin: $spacing-sm 0;
+	opacity: 0.2;
+}
+
+.sectionTitle {
+	font-size: 16px;
+	font-weight: 500;
+	color: $color-text-primary;
+	padding: $spacing-sm $spacing-md;
+	margin-top: $spacing-sm;
+	margin-bottom: $spacing-xs;
+}
+
+.sidebar {
+	width: 240px;
+	height: calc(100vh - 56px);
+	background-color: $color-bg-dark;
+	position: fixed;
+	top: 56px;
+	left: 0;
+	overflow-y: auto;
+	z-index: 900;
+	transition: width 0.2s ease-in-out;
+	@include hide-scrollbar;
+
+	&.collapsed {
+		width: 56px;
+
+		.divider {
+			margin: $spacing-sm 4px;
+		}
+	}
+}
+
+.sidebarNav {
+	padding: $spacing-sm 0;
+}
+
+.sidebarMenu {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.sidebarMenuItem {
+	@include flex(row, flex-start, center, $spacing-md);
+	padding: $spacing-sm $spacing-md;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	color: $color-text-primary;
+	height: 40px;
+
+	&:hover {
+		background-color: $color-bg-light;
+	}
+
+	&.active {
+		background-color: $color-bg-light;
+
+		.menuIcon {
+			color: $color-text-primary;
+		}
+	}
+}
+
+.menuIcon {
+	font-size: 24px;
+	color: $color-text-secondary;
+	min-width: 24px;
+	display: flex;
+	justify-content: center;
+}
+
+.menuLabel {
+	font-size: $font-size-md;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@include tablet {
+	.sidebar {
+		width: 72px;
+
+		.menuLabel {
+			display: none;
+		}
+
+		.sectionTitle {
+			display: none;
+		}
+	}
+}
+
+@include mobile {
+	.sidebar {
+		display: none;
+	}
+}

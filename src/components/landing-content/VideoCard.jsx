@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { CiMenuKebab } from "react-icons/ci";
 import { useNavigate } from "react-router";
 import {
@@ -12,9 +11,7 @@ function VideoCard({ video }) {
 	const navigate = useNavigate();
 	const { id, snippet, contentDetails, statistics } = video;
 
-	// Handle click to navigate to video detail page
 	const handleVideoClick = (e) => {
-		// Prevent navigation if menu is clicked
 		if (e.target.closest(`.${styles.menu}`)) {
 			e.stopPropagation();
 			return;
@@ -62,31 +59,5 @@ function VideoCard({ video }) {
 		</div>
 	);
 }
-
-VideoCard.propTypes = {
-	video: PropTypes.shape({
-		id: PropTypes.string.isRequired,
-		snippet: PropTypes.shape({
-			title: PropTypes.string.isRequired,
-			channelId: PropTypes.string.isRequired,
-			channelTitle: PropTypes.string.isRequired,
-			publishedAt: PropTypes.string.isRequired,
-			thumbnails: PropTypes.shape({
-				high: PropTypes.shape({
-					url: PropTypes.string.isRequired,
-				}).isRequired,
-				maxres: PropTypes.shape({
-					url: PropTypes.string,
-				}),
-			}).isRequired,
-		}).isRequired,
-		contentDetails: PropTypes.shape({
-			duration: PropTypes.string.isRequired,
-		}).isRequired,
-		statistics: PropTypes.shape({
-			viewCount: PropTypes.string.isRequired,
-		}).isRequired,
-	}).isRequired,
-};
 
 export default VideoCard;
