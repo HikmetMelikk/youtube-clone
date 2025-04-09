@@ -1,6 +1,10 @@
 @import "../../../src/sass/variables.scss";
 @import "../../../src/sass/mixins.scss";
 
+* {
+	font-weight: 600;
+}
+
 .content {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -105,8 +109,8 @@
 			flex: 1;
 
 			.videoTitle {
-				font-size: 14px;
-				font-weight: 500;
+				font-size: 16px;
+				font-weight: 700;
 				color: #fff;
 				margin-bottom: 6px;
 				line-height: 20px;
