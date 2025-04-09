@@ -23,11 +23,7 @@ export default function SearchBar() {
 					onKeyDown={(e) => e.key === "Enter" && handleSearch()}
 					value={search}
 				/>
-				<button
-					className={styles.navbarIcon}
-					onClick={() => {
-						console.log(search);
-					}}>
+				<button className={styles.navbarIcon} onClick={handleSearch}>
 					<CiSearch className={styles.iconStyles} id="search" />
 				</button>
 			</div>

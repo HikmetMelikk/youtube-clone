@@ -28,6 +28,7 @@
 		.hamburger {
 			height: 24px;
 			width: 24px;
+			cursor: pointer;
 		}
 	}
 
@@ -43,6 +44,7 @@
 			display: flex;
 			align-items: center;
 			width: 100%;
+			position: relative;
 
 			input {
 				padding: 0.6rem 1.5rem;
@@ -63,7 +65,7 @@
 			}
 
 			button {
-				padding: 1.15rem 1.5rem;
+				width: 60px;
 				border-radius: 0 40px 40px 0;
 				border: 1px solid hsl(0, 0%, 18.82%);
 				border-left: none;
@@ -80,10 +82,6 @@
 .iconStyles {
 	height: 24px;
 	width: 24px;
-}
-
-#search {
-	position: absolute;
 }
 
 .navbarIcon {

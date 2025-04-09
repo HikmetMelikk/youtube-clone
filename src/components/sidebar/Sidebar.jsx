@@ -14,7 +14,7 @@ import styles from "./sidebar.module.scss";
 
 const menuItems = [
 	{ id: 1, icon: <AiOutlineHome />, label: "Ana Sayfa", path: "/" },
-	{ id: 2, icon: <AiOutlineFire />, label: "Keşfet", path: "/explore" },
+	{ id: 2, icon: <AiOutlineFire />, label: "Keşfet", path: "/" },
 	{
 		id: 3,
 		icon: <MdOutlineSubscriptions />,
