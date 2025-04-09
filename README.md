@@ -91,14 +91,6 @@ youtube-clone/
 └── README.md
 ```
 
-## 📱 Ekran Görüntüleri
-
-- Ana Sayfa
-- Shorts Bölümü
-- Arama Sonuçları
-- Video İzleme Ekranı
-- Sidebar (Açık/Kapalı)
-
 ## 🧩 Bileşenler
 
 ### Ana Bileşenler
@@ -119,13 +111,7 @@ youtube-clone/
 
 ## 🔜 Geliştirme Planı
 
-- [ ] Giriş yapma özelliği
-- [ ] Video yorum bırakma
-- [ ] Dark/Light tema seçenekleri
-- [ ] Video bildirimleri
-- [ ] İzleme geçmişi
-- [ ] Playlist oluşturma
-
+- UI geliştirmeleri, detay sayfaları
 
 ## 🤝 Katkıda Bulunma
 
@@ -141,6 +127,6 @@ Bu proje [MIT lisansı](LICENSE) ile lisanslanmıştır.
 
 ## 📞 İletişim
 
-Proje sahibi - [@github_kullanici](https://github.com/kullanici)
+Proje sahibi - [@HikmetMelikk](https://github.com/HikmetMelikk)
 
-Proje linki: [https://github.com/kullanici/youtube-clone](https://github.com/kullanici/youtube-clone)
+Proje linki: [https://github.com/HikmetMelikk/youtube-clone](https://github.com/HikmetMelikk/youtube-clone)
