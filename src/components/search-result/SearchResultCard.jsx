@@ -21,10 +21,8 @@ function SearchResult({
 		navigate(`/watch?v=${id}`);
 	};
 
-	// Format date for better display
 	const formattedDate = formatPublishDate(publish);
 
-	// Format view count with appropriate notation
 	const formattedViews = formatViewCount(view);
 
 	return (

@@ -7,26 +7,6 @@ import VideoComments from "./VideoComments";
 import VideoTopRow from "./VideoTopRow";
 import styles from "./videoView.module.scss";
 
-// Helper function to parse YouTube duration format
-const parseYouTubeDuration = (duration) => {
-	const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-
-	const hours = match[1] ? match[1].replace("H", "") : 0;
-	const minutes = match[2] ? match[2].replace("M", "") : 0;
-	const seconds = match[3] ? match[3].replace("S", "") : 0;
-
-	let result = "";
-	if (hours > 0) {
-		result += hours + ":";
-		result += String(minutes).padStart(2, "0") + ":";
-	} else {
-		result += minutes + ":";
-	}
-	result += String(seconds).padStart(2, "0");
-
-	return result;
-};
-
 function VideoDetails() {
 	const { videoId } = useParams();
 	const [searchParams] = useSearchParams();
@@ -53,7 +33,6 @@ function VideoDetails() {
 				})
 				.then((relatedData) => {
 					if (relatedData && relatedData.items) {
-						// Filter out the current video from related videos
 						const filteredVideos = relatedData.items.filter(
 							(item) => item.id.videoId !== actualVideoId
 						);
@@ -74,7 +53,6 @@ function VideoDetails() {
 	if (error) return <div className={styles.error}>{error}</div>;
 	if (!video) return <div className={styles.error}>Video bulunamadı</div>;
 
-	// Gelen API yanıtına göre içeriği oluştur
 	const { snippet, statistics } = video;
 
 	return (

@@ -16,14 +16,12 @@ function ShortsContent() {
 				const response = await YoutubeAPI.getRandomVideos();
 
 				if (response && response.items && response.items.length > 0) {
-					// Filter for shorts - videos with duration < 60 seconds
 					const shortsVideos = response.items.filter((video) => {
-						// Parse duration using regex to extract seconds
 						const durationPattern = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/;
 						const matches =
 							video.contentDetails.duration.match(durationPattern);
 
-						if (!matches) return false; // Skip video if duration format is unknown
+						if (!matches) return false;
 
 						const hours = matches[1] ? parseInt(matches[1], 10) : 0;
 						const minutes = matches[2] ? parseInt(matches[2], 10) : 0;
@@ -31,11 +29,9 @@ function ShortsContent() {
 
 						const totalSeconds = hours * 3600 + minutes * 60 + seconds;
 
-						// Keep only videos shorter than 60 seconds
 						return totalSeconds < 60;
 					});
 
-					// Limit shorts to MAX_SHORTS_COUNT (7)
 					setShorts(shortsVideos.slice(0, MAX_SHORTS_COUNT));
 				}
 				setLoading(false);
@@ -49,7 +45,6 @@ function ShortsContent() {
 		fetchShorts();
 	}, []);
 
-	// Don't render anything if no shorts are available
 	if (!loading && !error && (!shorts || shorts.length === 0)) {
 		return null;
 	}

@@ -7,12 +7,12 @@
 .app-container {
 	display: flex;
 	width: 100%;
-	height: calc(100vh - 56px); // Navbar yüksekliğine göre
+	height: calc(100vh - 56px);
 }
 
 .main-content {
 	flex: 1;
-	margin-left: 240px; // Sidebar genişliği
+	margin-left: 240px;
 	transition: margin-left 0.2s ease-in-out;
 	overflow-y: auto;
 
@@ -21,7 +21,6 @@
 	}
 }
 
-// Media sorgularını ekleyin
 @media (max-width: 768px) {
 	.main-content {
 		margin-left: 72px;

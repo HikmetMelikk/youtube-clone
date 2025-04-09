@@ -7,7 +7,6 @@ function Shorts({ id, title, thumbnail, views }) {
 	const navigate = useNavigate();
 
 	const handleShortsClick = (e) => {
-		// Prevent navigation if menu is clicked
 		if (e.target.closest(`.${styles.menu}`)) {
 			e.stopPropagation();
 			return;

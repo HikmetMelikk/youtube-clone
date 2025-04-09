@@ -46,7 +46,6 @@ export const formatPublishDate = (publishDate) => {
 export const formatDuration = (duration) => {
 	if (!duration) return "";
 
-	// Match hours, minutes, and seconds
 	const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
 
 	if (!match) return "";
@@ -55,7 +54,6 @@ export const formatDuration = (duration) => {
 	const minutes = match[2] ? parseInt(match[2], 10) : 0;
 	const seconds = match[3] ? parseInt(match[3], 10) : 0;
 
-	// Format based on available parts
 	if (hours > 0) {
 		return `${hours}:${String(minutes).padStart(2, "0")}:${String(
 			seconds

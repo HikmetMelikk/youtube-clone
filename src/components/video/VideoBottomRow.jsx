@@ -8,18 +8,14 @@ export default function VideoBottomRow({
 }) {
 	const [showFullDescription, setShowFullDescription] = useState(false);
 
-	// Açıklama metninin uzunluğunu kontrol etmek için
 	const isLongDescription = description && description.split("\n").length > 3;
 
-	// Gösterilecek açıklama metni (kısaltılmış veya tam)
 	const displayDescription = description || "";
 
-	// Format view count
 	const formattedViewCount = viewCount
 		? parseInt(viewCount).toLocaleString() + " görüntülenme"
 		: "0 görüntülenme";
 
-	// Format publish date
 	const formatDate = (dateString) => {
 		if (!dateString) return "";
 		const date = new Date(dateString);
@@ -30,7 +26,6 @@ export default function VideoBottomRow({
 		});
 	};
 
-	// Açıklama durumunu değiştiren fonksiyon
 	const toggleDescription = () => {
 		setShowFullDescription(!showFullDescription);
 	};

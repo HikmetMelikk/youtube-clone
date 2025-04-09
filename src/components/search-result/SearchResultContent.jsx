@@ -30,7 +30,6 @@ function SearchResultContent() {
 		}
 	}, [searchQuery]);
 
-	// Generate random view count for demo purposes
 	const generateRandomViewCount = () => {
 		return Math.floor(Math.random() * 10000000) + 100000;
 	};

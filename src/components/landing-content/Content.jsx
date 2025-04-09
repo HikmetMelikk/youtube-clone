@@ -15,13 +15,11 @@ function Content() {
 			const response = await YoutubeAPI.getRandomVideos();
 
 			if (response && response.items && response.items.length > 0) {
-				// Filter out shorts - videos with duration < 60 seconds
 				const filteredVideos = response.items.filter((video) => {
-					// Parse duration using regex to extract seconds
 					const durationPattern = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/;
 					const matches = video.contentDetails.duration.match(durationPattern);
 
-					if (!matches) return true; // Keep video if duration format is unknown
+					if (!matches) return true;
 
 					const hours = matches[1] ? parseInt(matches[1], 10) : 0;
 					const minutes = matches[2] ? parseInt(matches[2], 10) : 0;
@@ -29,7 +27,6 @@ function Content() {
 
 					const totalSeconds = hours * 3600 + minutes * 60 + seconds;
 
-					// Filter out videos shorter than 60 seconds
 					return totalSeconds >= 60;
 				});
 
@@ -58,7 +55,6 @@ function Content() {
 		return <div className={styles.error}>{error}</div>;
 	}
 
-	// Show first 4 videos, then shorts section, then remaining videos
 	const firstVideos = videos.slice(0, 4);
 	const remainingVideos = videos.slice(4);
 

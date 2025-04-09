@@ -28,7 +28,6 @@ export default function VideoComments({ commentCount, videoId }) {
 						}));
 						setComments(formattedComments);
 					} else {
-						// Fall back to a placeholder if no comments are available
 						setComments([
 							{
 								id: "placeholder",
@@ -43,7 +42,7 @@ export default function VideoComments({ commentCount, videoId }) {
 				.catch((err) => {
 					console.error("Comments error:", err);
 					setError("Yorumlar yüklenirken bir hata oluştu");
-					// Set a placeholder comment on error
+
 					setComments([
 						{
 							id: "error",
@@ -61,7 +60,6 @@ export default function VideoComments({ commentCount, videoId }) {
 		}
 	}, [videoId]);
 
-	// Format comment date
 	const formatCommentDate = (dateString) => {
 		if (!dateString) return "";
 		const date = new Date(dateString);
