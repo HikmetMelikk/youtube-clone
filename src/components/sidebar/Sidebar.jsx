@@ -52,10 +52,21 @@ const youItems = [
 	{ id: 6, icon: <MdContentCut />, label: "Kliplerim", path: "/clips" },
 ];
 
-function Sidebar({ collapsed = false }) {
+function Sidebar({ collapsed = false, isOpen = false, onOverlayClick }) {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [activeItem, setActiveItem] = useState("/");
+	const [isMobile, setIsMobile] = useState(window.innerWidth <= 576);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth <= 576);
+		};
+
+		window.addEventListener("resize", handleResize);
+
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
 	useEffect(() => {
 		setActiveItem(location.pathname);
@@ -63,47 +74,65 @@ function Sidebar({ collapsed = false }) {
 
 	const handleNavigation = (path) => {
 		navigate(path);
+		if (isMobile) {
+			onOverlayClick();
+		}
 	};
 
 	return (
-		<aside className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""}`}>
-			<nav className={styles.sidebarNav}>
-				<ul className={styles.sidebarMenu}>
-					{menuItems.map((item) => (
-						<li
-							key={item.id}
-							className={`${styles.sidebarMenuItem} ${
-								activeItem === item.path ? styles.active : ""
-							}`}
-							onClick={() => handleNavigation(item.path)}>
-							<div className={styles.menuIcon}>{item.icon}</div>
-							{!collapsed && (
-								<span className={styles.menuLabel}>{item.label}</span>
-							)}
-						</li>
-					))}
-				</ul>
-				<div className={styles.divider}></div>
+		<>
+			{isMobile && (
+				<div
+					className={`${styles.sidebarOverlay} ${isOpen ? styles.open : ""}`}
+					onClick={onOverlayClick}
+				/>
+			)}
+			<aside
+				className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""} ${
+					isOpen ? styles.open : ""
+				}`}>
+				<nav className={styles.sidebarNav}>
+					<ul className={styles.sidebarMenu}>
+						{menuItems.map((item) => (
+							<li
+								key={item.id}
+								className={`${styles.sidebarMenuItem} ${
+									activeItem === item.path ? styles.active : ""
+								}`}
+								onClick={() => handleNavigation(item.path)}>
+								<div className={styles.menuIcon}>{item.icon}</div>
+								{/* Always show labels on mobile, regardless of collapsed state */}
+								{(isMobile || !collapsed) && (
+									<span className={styles.menuLabel}>{item.label}</span>
+								)}
+							</li>
+						))}
+					</ul>
+					<div className={styles.divider}></div>
 
-				{!collapsed && <h3 className={styles.sectionTitle}>Siz &gt;</h3>}
+					{(isMobile || !collapsed) && (
+						<h3 className={styles.sectionTitle}>Siz &gt;</h3>
+					)}
 
-				<ul className={styles.sidebarMenu}>
-					{youItems.map((item) => (
-						<li
-							key={item.id}
-							className={`${styles.sidebarMenuItem} ${
-								activeItem === item.path ? styles.active : ""
-							}`}
-							onClick={() => handleNavigation(item.path)}>
-							<div className={styles.menuIcon}>{item.icon}</div>
-							{!collapsed && (
-								<span className={styles.menuLabel}>{item.label}</span>
-							)}
-						</li>
-					))}
-				</ul>
-			</nav>
-		</aside>
+					<ul className={styles.sidebarMenu}>
+						{youItems.map((item) => (
+							<li
+								key={item.id}
+								className={`${styles.sidebarMenuItem} ${
+									activeItem === item.path ? styles.active : ""
+								}`}
+								onClick={() => handleNavigation(item.path)}>
+								<div className={styles.menuIcon}>{item.icon}</div>
+								{/* Always show labels on mobile, regardless of collapsed state */}
+								{(isMobile || !collapsed) && (
+									<span className={styles.menuLabel}>{item.label}</span>
+								)}
+							</li>
+						))}
+					</ul>
+				</nav>
+			</aside>
+		</>
 	);
 }
 
