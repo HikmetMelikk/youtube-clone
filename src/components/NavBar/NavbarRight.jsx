@@ -1,6 +1,6 @@
 import { FiPlus } from "react-icons/fi";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import emrethefuckingaka from "../../assets/emrethefuckingaka.png";
+import hikmet from "../../assets/ben.webp";
 import styles from "./navbar.module.scss";
 
 export default function NavbarRight() {
@@ -16,7 +16,7 @@ export default function NavbarRight() {
 			</button>
 			<div>
 				<img
-					src={emrethefuckingaka}
+					src={hikmet}
 					alt="profile"
 					className={styles.navbarIcon}
 					style={{ objectFit: "cover" }}
